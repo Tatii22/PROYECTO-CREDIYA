@@ -1,6 +1,6 @@
 package com.tati.model;
 
-public class Usuario {
+public abstract class Usuario {
     private int id;
     private String nombre;
     private int documento;
@@ -67,4 +67,11 @@ public class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario [id=" + id + ", nombre=" + nombre + ", documento=" + documento + ", correo=" + correo
+                + ", usuario=" + usuario + ", contrasena=" + contrasena + "]";
+    }
+    
 }

@@ -19,4 +19,10 @@ public class Empleado extends Usuario {
     public void setSalario(double salario) {
         this.salario = salario;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", salario=" + salario;
+    } 
+    
 }
