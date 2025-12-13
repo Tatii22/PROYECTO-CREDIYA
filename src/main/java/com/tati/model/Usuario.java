@@ -1,6 +1,6 @@
 package com.tati.model;
 
-public abstract class Usuario {
+public class Usuario {
     private int id;
     private String nombre;
     private int documento;
@@ -17,8 +17,8 @@ public abstract class Usuario {
         this.contrasena = contrasena;
     }
 
-    public Usuario() {
-    }
+    public Usuario() {}
+
 
     public int getId() {
         return id;
