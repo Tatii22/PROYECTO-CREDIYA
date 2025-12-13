@@ -1,0 +1,116 @@
+package com.tati.views;
+
+import java.util.List;
+import java.util.Scanner;
+
+import com.tati.controller.EmpleadoController;
+import com.tati.model.Empleado;
+
+public class MenuAdmin {
+
+    private final EmpleadoController empleadoController;
+    private final Scanner scan = new Scanner(System.in);
+
+    public MenuAdmin(EmpleadoController empleadoController) {
+        this.empleadoController = empleadoController;
+    }
+
+    public void iniciar() {
+        int opcion = -1;
+        do {
+            mostrarMenu();
+            try {
+                opcion = Integer.parseInt(scan.nextLine());
+                procesarOpcion(opcion);
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número.");
+            }
+        } while (opcion != 0);
+    }
+
+    public void mostrarMenu() {
+
+        String viewMenu = """
+        .--. .---. .-..-..-..-..-..-. .--. .-----..---.  .--. .---.  .--. .---. 
+        : .; :: .  :: `' :: :: `: :: :: .--'`-. .-': .; :: .; :: .  :: ,. :: .; :
+        :    :: :: :: .. :: :: .` :: :`. `.   : :  :   .':    :: :: :: :: ::   .'
+        : :: :: :; :: :; :: :: :. :: : _`, :  : :  : :.`.: :: :: :; :: :; :: :.`.
+        :_;:_;:___.':_;:_;:_;:_;:_;:_;`.__.'  :_;  :_;:_;:_;:_;:___.'`.__.':_;:_;
+        """;
+
+        String menuOpciones = """
+                            +-----------------------------------+
+                            |          * Bienvenid@ *           |
+                            +-----------------------------------+
+                            | [1] Crear empleado                |
+                            | [2] Consultar empleados           |
+                            | [3] Consultar préstamos           |
+                            | [4] Consultar clientes            |
+                            | [5] Datos sensibles               |
+                            +-----------------------------------+
+                            | [0] Volver al menú principal      |
+                            +-----------------------------------+
+                """;
+
+        System.out.println("\n" + viewMenu);
+        System.out.println(menuOpciones);
+        System.out.print(">>> Ingrese su opción: ");
+    }
+
+    public void procesarOpcion(int opcion) {
+
+        switch (opcion) {
+
+            case 1 -> crearEmpleado();
+
+            case 2 -> listarEmpleados();
+
+            case 3 -> System.out.println("Consultar préstamos - En construcción");
+
+            case 4 -> System.out.println("Consultar clientes - En construcción");
+
+            case 5 -> System.out.println("Datos sensibles - En construcción");
+
+            case 0 -> System.out.println("Volviendo al menú principal...");
+
+            default -> System.out.println("Opción no válida. Intente de nuevo.");
+        }
+    }
+
+    private void crearEmpleado() {
+
+        System.out.println("Nombre:");
+        String nombre = scan.nextLine();
+
+        System.out.println("Documento:");
+        int documento = Integer.parseInt(scan.nextLine());
+
+        System.out.println("Correo:");
+        String correo = scan.nextLine();
+
+        System.out.println("Salario:");
+        double salario = Double.parseDouble(scan.nextLine());
+
+        System.out.println("Usuario:");
+        String usuario = scan.nextLine();
+
+        System.out.println("Contraseña:");
+        String contrasena = scan.nextLine();
+
+        Empleado empleado = new Empleado();
+        empleado.setNombre(nombre);
+        empleado.setDocumento(documento);
+        empleado.setCorreo(correo);
+        empleado.setSalario(salario);
+        empleado.setUsuario(usuario);
+        empleado.setContrasena(contrasena);
+
+        empleadoController.crearEmpleado(empleado);
+        System.out.println("Empleado registrado correctamente ✅");
+    }
+
+    private void listarEmpleados() {
+        List<Empleado> empleados = empleadoController.listarEmpleados();
+        empleados.forEach(System.out::println);
+    }
+}
