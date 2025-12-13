@@ -2,11 +2,15 @@ package com.tati.views;
 
 import com.tati.controller.EmpleadoController;
 import com.tati.controller.LoginController;
+import com.tati.model.Cliente;
 import com.tati.model.Usuario;
+import com.tati.repository.cliente.ClienteDBRepository;
 import com.tati.repository.empleado.EmpleadoDBRepository;
 import com.tati.repository.usuario.UsuarioDBRepository;
+import com.tati.service.cliente.ClienteServiceImpl;
 import com.tati.service.empleado.EmpleadoServiceImpl;
 import com.tati.service.usuario.UsuarioServiceImpl;
+import com.tati.controller.ClienteController;
 
 import java.util.Scanner;
 
@@ -55,13 +59,9 @@ public class MenuPrincipal {
             switch (rol.toUpperCase()) {
 
                 case "ADMINISTRADOR":
-                    EmpleadoController empleadoController =
-                            new EmpleadoController(
-                                    new EmpleadoServiceImpl(
-                                            new EmpleadoDBRepository()
-                                    )
-                            );
-                    new MenuAdmin(empleadoController).iniciar();
+                    EmpleadoController empleadoController = new EmpleadoController(new EmpleadoServiceImpl(new EmpleadoDBRepository()));
+                    ClienteController clienteController = new ClienteController(new ClienteServiceImpl(new ClienteDBRepository()));
+                    new MenuAdmin(empleadoController, clienteController).iniciar();
                     break;
 
                 case "EMPLEADO":

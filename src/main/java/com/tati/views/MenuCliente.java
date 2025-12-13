@@ -40,6 +40,7 @@ public void mostrarMenu() {
                         | [1] Consultar mis préstamos       |
                         | [2] Pagar cuota                   |
                         | [3] Ver mi estado general         |
+                        | [4] Ver simulación de prestamo    |
                         +-----------------------------------+
                         | [0] Volver al menu pricipal       |
                         +-----------------------------------+
@@ -60,6 +61,9 @@ public void mostrarMenu() {
                 break;
             case 3:
                 System.out.println("Ver mi estado general - En construcción");
+                break;
+            case 4:
+                System.out.println("Ver simulación de prestamo - En construcción");
                 break;
             case 0:
                 System.out.println("Volviendo al menú principal...");

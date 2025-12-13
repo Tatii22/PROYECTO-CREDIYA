@@ -5,14 +5,18 @@ import java.util.Scanner;
 
 import com.tati.controller.EmpleadoController;
 import com.tati.model.Empleado;
+import com.tati.model.Cliente;
+import com.tati.controller.ClienteController;;
 
 public class MenuAdmin {
 
     private final EmpleadoController empleadoController;
+    private final ClienteController clienteController;
     private final Scanner scan = new Scanner(System.in);
 
-    public MenuAdmin(EmpleadoController empleadoController) {
+    public MenuAdmin(EmpleadoController empleadoController, ClienteController clienteController) {
         this.empleadoController = empleadoController;
+        this.clienteController = clienteController;
     }
 
     public void iniciar() {
@@ -67,7 +71,7 @@ public class MenuAdmin {
 
             case 3 -> System.out.println("Consultar préstamos - En construcción");
 
-            case 4 -> System.out.println("Consultar clientes - En construcción");
+            case 4 -> listarClientes();
 
             case 5 -> System.out.println("Datos sensibles - En construcción");
 
@@ -112,5 +116,10 @@ public class MenuAdmin {
     private void listarEmpleados() {
         List<Empleado> empleados = empleadoController.listarEmpleados();
         empleados.forEach(System.out::println);
+    }
+
+    private void listarClientes() {
+        List<Cliente> clientes = clienteController.listarClientes();
+        clientes.forEach(System.out::println);
     }
 }
