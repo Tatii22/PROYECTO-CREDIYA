@@ -15,19 +15,38 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void registrarCliente(Cliente cliente) {
+
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser null");
+        }
+
         if (cliente.getNombre() == null || cliente.getNombre().isBlank()) {
             throw new IllegalArgumentException("El nombre es obligatorio");
         }
-        clienteRepository.save(cliente);
-    }
 
-    @Override
-    public Cliente buscarPorId(int id) {
-        return clienteRepository.findById(id);
+        if (cliente.getDocumento() <= 0) {
+            throw new IllegalArgumentException("Documento inválido");
+        }
+
+        if (cliente.getTelefono() == null || cliente.getTelefono().isBlank()) {
+            throw new IllegalArgumentException("El teléfono es obligatorio");
+        }
+
+        clienteRepository.save(cliente);
     }
 
     @Override
     public List<Cliente> listarClientes() {
         return clienteRepository.findAll();
+    }
+
+    @Override
+    public Cliente buscarPorId(int id) {
+
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID inválido");
+        }
+
+        return clienteRepository.findById(id);
     }
 }

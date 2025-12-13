@@ -16,8 +16,16 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public void registrarEmpleado(Empleado empleado) {
 
+        if (empleado == null) {
+            throw new IllegalArgumentException("El empleado no puede ser null");
+        }
+
         if (empleado.getNombre() == null || empleado.getNombre().isBlank()) {
-            throw new IllegalArgumentException("El nombre del empleado es obligatorio");
+            throw new IllegalArgumentException("El nombre es obligatorio");
+        }
+
+        if (empleado.getDocumento() <= 0) {
+            throw new IllegalArgumentException("Documento inválido");
         }
 
         if (empleado.getSalario() <= 0) {
@@ -28,12 +36,17 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public Empleado buscarPorId(int id) {
-        return empleadoRepository.findById(id);
+    public List<Empleado> listarEmpleados() {
+        return empleadoRepository.findAll();
     }
 
     @Override
-    public List<Empleado> listarEmpleados() {
-        return empleadoRepository.findAll();
+    public Empleado buscarPorId(int id) {
+
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID inválido");
+        }
+
+        return empleadoRepository.findById(id);
     }
 }
