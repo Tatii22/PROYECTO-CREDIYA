@@ -61,7 +61,8 @@ public class MenuEmpleado {
                 | [1] Registrar Cliente       |
                 | [2] Registrar Préstamo      |
                 | [3] Listar Clientes         |
-                | [0] Volver                  |
+                +-----------------------------+
+                | [0] Volver al menu pricipal |
                 +-----------------------------+
             """);
        
@@ -108,7 +109,7 @@ public class MenuEmpleado {
 
         clienteController.crearCliente(cliente);
 
-        System.out.println("✅ Cliente registrado correctamente");
+        System.out.println(" Cliente registrado correctamente");
     }
 
     private void listarClientes() {
@@ -144,6 +145,6 @@ public class MenuEmpleado {
 
         prestamoController.crearPrestamo(prestamo);
 
-        System.out.println("✅ Préstamo registrado correctamente");
+        System.out.println(" Préstamo registrado correctamente");
     }
 }

@@ -118,7 +118,7 @@ public class MenuAdmin {
         empleado.setContrasena(contrasena);
 
         empleadoController.crearEmpleado(empleado);
-        System.out.println("Empleado registrado correctamente ✅");
+        System.out.println("Empleado registrado correctamente ");
     }
 
     private void listarEmpleados() {
