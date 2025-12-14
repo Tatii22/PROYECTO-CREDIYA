@@ -77,7 +77,31 @@ public class EmpleadoDBRepository implements EmpleadoRepository {
     }
     
 
-    @Override public Empleado findById(int id) { return null; }
+    @Override public Empleado findById(int id) { 
+        String sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Empleado e = new Empleado();
+                e.setId(rs.getInt("id_usuario"));
+                e.setNombre(rs.getString("nombre"));
+                e.setDocumento(rs.getInt("documento"));
+                e.setCorreo(rs.getString("correo"));
+                e.setSalario(rs.getDouble("salario"));
+                e.setUsuario(rs.getString("usuario"));
+                return e;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error buscando empleado por id: " + e.getMessage());
+        }
+
+        return null;
+    }
 
     private int obtenerRoleId(Connection conn, String nombreRol) throws SQLException {
         String sql = "SELECT id_rol FROM roles WHERE nombre_rol = ?";

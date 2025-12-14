@@ -1,5 +1,7 @@
 package com.tati.repository.prestamo;
 
+import com.tati.model.Cliente;
+import com.tati.model.Empleado;
 import com.tati.model.EstadoPrestamo;
 import com.tati.model.Prestamo;
 import com.tati.utils.DatabaseConnection;
@@ -15,7 +17,7 @@ public class PrestamoDBRepository implements PrestamoRepository {
 
         String sql = """
             INSERT INTO prestamos
-            (id_cliente, id_empleado, monto, interes, cuotas,
+            (cliente_id, empleado_id, monto, interes, cuotas,
              fecha_inicio, fecha_vencimiento, saldo_pendiente, estado)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """;
@@ -87,7 +89,7 @@ public class PrestamoDBRepository implements PrestamoRepository {
     public List<Prestamo> findByClienteId(int id) {
 
         List<Prestamo> prestamos = new ArrayList<>();
-        String sql = "SELECT * FROM prestamos WHERE id_cliente = ?";
+        String sql = "SELECT * FROM prestamos WHERE cliente_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -129,23 +131,6 @@ public class PrestamoDBRepository implements PrestamoRepository {
         return prestamos;
     }
 
-    
-    
-    private Prestamo mapPrestamo(ResultSet rs) throws SQLException {
-
-        Prestamo p = new Prestamo();
-        p.setId(rs.getInt("id_prestamo"));
-        p.setMonto(rs.getDouble("monto"));
-        p.setInteres(rs.getDouble("interes"));
-        p.setCuotas(rs.getInt("cuotas"));
-        p.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
-        p.setFechaVencimiento(rs.getDate("fecha_vencimiento").toLocalDate());
-        p.setSaldoPendiente(rs.getDouble("saldo_pendiente"));
-        p.setEstado(EstadoPrestamo.valueOf(rs.getString("estado")));
-
-        // Cliente y Empleado se mapean después (por ahora OK)
-        return p;
-    }
     @Override
     public void actualizarSaldoYEstado(int idPrestamo, double saldo, String estado) {
 
@@ -156,7 +141,7 @@ public class PrestamoDBRepository implements PrestamoRepository {
         """;
 
         try (Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setDouble(1, saldo);
             ps.setString(2, estado);
@@ -169,4 +154,26 @@ public class PrestamoDBRepository implements PrestamoRepository {
         }
     }
 
+    private Prestamo mapPrestamo(ResultSet rs) throws SQLException {
+
+        Prestamo p = new Prestamo();
+        p.setId(rs.getInt("id_prestamo"));
+        p.setMonto(rs.getDouble("monto"));
+        p.setInteres(rs.getDouble("interes"));
+        p.setCuotas(rs.getInt("cuotas"));
+        p.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
+        p.setFechaVencimiento(rs.getDate("fecha_vencimiento").toLocalDate());
+        p.setSaldoPendiente(rs.getDouble("saldo_pendiente"));
+        p.setEstado(EstadoPrestamo.valueOf(rs.getString("estado")));
+
+        Cliente cliente = new Cliente();
+        cliente.setId(rs.getInt("cliente_id"));
+        p.setCliente(cliente);
+
+        Empleado empleado = new Empleado();
+        empleado.setId(rs.getInt("empleado_id"));
+        p.setEmpleado(empleado);
+
+        return p;
+    }
 }

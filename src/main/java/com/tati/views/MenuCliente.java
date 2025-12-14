@@ -2,11 +2,14 @@ package com.tati.views;
 
 import java.util.Scanner;
 
-public class MenuCliente {
-    private Scanner scan;
+import com.tati.model.Cliente;
 
-    public MenuCliente() {
-        scan = new Scanner(System.in);
+public class MenuCliente {
+    private final Cliente cliente;
+    private final Scanner scan = new Scanner(System.in);
+
+    public MenuCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
     public void iniciar() {
         int opcion = -1;

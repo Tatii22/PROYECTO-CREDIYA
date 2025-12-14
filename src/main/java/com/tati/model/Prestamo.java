@@ -3,10 +3,14 @@ package com.tati.model;
 import java.time.LocalDate;
 
 public class Prestamo {
+
     private int id;
+
+    // Relaciones (FK en BD)
     private Cliente cliente;
     private Empleado empleado;
-    
+
+    // Datos del préstamo
     private double monto;
     private double interes;
     private int cuotas;
@@ -17,8 +21,18 @@ public class Prestamo {
     private double saldoPendiente;
     private EstadoPrestamo estado;
 
-    public Prestamo(int id, Cliente cliente, Empleado empleado, double monto, double interes, int cuotas,
-            LocalDate fechaInicio, LocalDate fechaVencimiento, double saldoPendiente, EstadoPrestamo estado) {
+
+    public Prestamo() {
+        this.estado = EstadoPrestamo.PENDIENTE;
+        this.fechaInicio = LocalDate.now();
+    }
+
+
+    public Prestamo(int id, Cliente cliente, Empleado empleado,
+                    double monto, double interes, int cuotas,
+                    LocalDate fechaInicio, LocalDate fechaVencimiento,
+                    double saldoPendiente, EstadoPrestamo estado) {
+
         this.id = id;
         this.cliente = cliente;
         this.empleado = empleado;
@@ -31,12 +45,9 @@ public class Prestamo {
         this.estado = estado;
     }
 
-    public Prestamo() {
-        this.estado = EstadoPrestamo.PENDIENTE;
-    }
 
     public double calcularMontoTotal() {
-        return monto + (monto * interes/100);
+        return monto + (monto * interes / 100);
     }
 
     public double calcularCuotaMensual() {
@@ -45,27 +56,25 @@ public class Prestamo {
 
     public void verificarVencimiento() {
         if (estado == EstadoPrestamo.PENDIENTE &&
-            LocalDate.now().isAfter(fechaVencimiento)) {
+                LocalDate.now().isAfter(fechaVencimiento)) {
             estado = EstadoPrestamo.VENCIDO;
         }
     }
-
 
     public void aplicarPago(double montoPagado) {
         if (montoPagado <= 0) {
             throw new IllegalArgumentException("El monto pagado debe ser mayor que cero");
         }
+
         saldoPendiente -= montoPagado;
 
         if (saldoPendiente <= 0) {
             saldoPendiente = 0;
-            estado = EstadoPrestamo.PAGADO;            
+            estado = EstadoPrestamo.PAGADO;
         }
     }
 
-    public boolean estaVencido() {
-        return estado == EstadoPrestamo.VENCIDO;
-    }
+
     public int getId() {
         return id;
     }
@@ -96,6 +105,7 @@ public class Prestamo {
 
     public void setMonto(double monto) {
         this.monto = monto;
+        this.saldoPendiente = calcularMontoTotal(); 
     }
 
     public double getInteres() {
@@ -134,10 +144,6 @@ public class Prestamo {
         return saldoPendiente;
     }
 
-    public void setSaldoPendiente(double saldoPendiente) {
-        this.saldoPendiente = saldoPendiente;
-    }
-
     public EstadoPrestamo getEstado() {
         return estado;
     }
@@ -145,5 +151,16 @@ public class Prestamo {
     public void setEstado(EstadoPrestamo estado) {
         this.estado = estado;
     }
-    
+
+    public void setSaldoPendiente(double saldoPendiente) {
+        this.saldoPendiente = saldoPendiente;
+    }
+
+        public void inicializarPrestamo() {
+        this.fechaInicio = LocalDate.now();
+        this.fechaVencimiento = fechaInicio.plusMonths(cuotas);
+        this.saldoPendiente = calcularMontoTotal();
+        this.estado = EstadoPrestamo.PENDIENTE;
+    }
 }
+

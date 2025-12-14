@@ -1,12 +1,12 @@
 package com.tati.service.prestamo;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.tati.model.Prestamo;
 import com.tati.repository.prestamo.PrestamoRepository;
 
 public class PrestamoServiceImpl implements PrestamoService {
+
     private final PrestamoRepository prestamoRepository;
 
     public PrestamoServiceImpl(PrestamoRepository prestamoRepository) {
@@ -15,29 +15,32 @@ public class PrestamoServiceImpl implements PrestamoService {
 
     @Override
     public void crearPrestamo(Prestamo prestamo) {
+
         if (prestamo == null) {
-            throw new IllegalArgumentException("El préstamo no puede ser null");            
+            throw new IllegalArgumentException("El préstamo no puede ser null");
         }
 
         if (prestamo.getMonto() <= 0) {
             throw new IllegalArgumentException("El monto debe ser mayor que cero");
         }
+
         if (prestamo.getCuotas() <= 0) {
-            throw new IllegalArgumentException("Numero de cuotas invalido");
+            throw new IllegalArgumentException("Número de cuotas inválido");
         }
 
-        prestamo.setFechaInicio(LocalDate.now());
-        prestamo.setFechaVencimiento(
-                prestamo.getFechaInicio().plusMonths(prestamo.getCuotas())
-        );
+        if (prestamo.getCliente() == null || prestamo.getEmpleado() == null) {
+            throw new IllegalArgumentException("Cliente y empleado son obligatorios");
+        }
 
-        prestamo.setSaldoPendiente(prestamo.calcularMontoTotal());
+      
+        prestamo.inicializarPrestamo();
 
         prestamoRepository.save(prestamo);
     }
-    
+
     @Override
     public void registrarPago(int idPrestamo, double monto) {
+
         Prestamo prestamo = prestamoRepository.findById(idPrestamo);
 
         if (prestamo == null) {
@@ -45,7 +48,12 @@ public class PrestamoServiceImpl implements PrestamoService {
         }
 
         prestamo.aplicarPago(monto);
-        prestamoRepository.save(prestamo);
+
+        prestamoRepository.actualizarSaldoYEstado(
+                prestamo.getId(),
+                prestamo.getSaldoPendiente(),
+                prestamo.getEstado().name()
+        );
     }
 
     @Override
@@ -55,6 +63,7 @@ public class PrestamoServiceImpl implements PrestamoService {
         }
         return prestamoRepository.findById(id);
     }
+
     @Override
     public List<Prestamo> listarPorCliente(int idCliente) {
         return prestamoRepository.findByClienteId(idCliente);
