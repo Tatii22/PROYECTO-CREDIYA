@@ -14,4 +14,7 @@ public interface PrestamoService {
     List<Prestamo> listarPorCliente(int idCliente);
 
     List<Prestamo> listarPorEstado(String estado);
+
+    List<Prestamo> listarTodosPrestamos();
+
 }

@@ -11,5 +11,7 @@ public interface PrestamoRepository extends Repository<Prestamo> {
 
     List<Prestamo> findByEstado(String estado);
 
+    List<Prestamo> findAll();
+
     void actualizarSaldoYEstado(int idPrestamo, double saldo, String estado);
 }

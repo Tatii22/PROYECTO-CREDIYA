@@ -4,20 +4,31 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.tati.controller.EmpleadoController;
+import com.tati.controller.PrestamoController;
 import com.tati.model.Empleado;
 import com.tati.model.Cliente;
+import com.tati.model.Prestamo;
+import com.tati.repository.prestamo.PrestamoDBRepository;
+import com.tati.service.prestamo.PrestamoServiceImpl;
 import com.tati.controller.ClienteController;;
 
 public class MenuAdmin {
 
     private final EmpleadoController empleadoController;
     private final ClienteController clienteController;
+    private final PrestamoController prestamoController;
+    
+
     private final Scanner scan = new Scanner(System.in);
 
     public MenuAdmin(EmpleadoController empleadoController, ClienteController clienteController) {
         this.empleadoController = empleadoController;
         this.clienteController = clienteController;
+        PrestamoDBRepository prestamoRepo = new PrestamoDBRepository();
+        PrestamoServiceImpl prestamoService = new PrestamoServiceImpl(prestamoRepo);
+        this.prestamoController = new PrestamoController(prestamoService);
     }
+    
 
     public void iniciar() {
         int opcion = -1;
@@ -50,7 +61,6 @@ public class MenuAdmin {
                             | [2] Consultar empleados           |
                             | [3] Consultar préstamos           |
                             | [4] Consultar clientes            |
-                            | [5] Datos sensibles               |
                             +-----------------------------------+
                             | [0] Volver al menú principal      |
                             +-----------------------------------+
@@ -69,11 +79,9 @@ public class MenuAdmin {
 
             case 2 -> listarEmpleados();
 
-            case 3 -> System.out.println("Consultar préstamos - En construcción");
+            case 3 ->  listarPrestamos();
 
             case 4 -> listarClientes();
-
-            case 5 -> System.out.println("Datos sensibles - En construcción");
 
             case 0 -> System.out.println("Volviendo al menú principal...");
 
@@ -121,5 +129,16 @@ public class MenuAdmin {
     private void listarClientes() {
         List<Cliente> clientes = clienteController.listarClientes();
         clientes.forEach(System.out::println);
+    }
+    private void listarPrestamos() {
+        List<Prestamo> prestamos = prestamoController.listarTodosPrestamos();
+        System.out.println("=== LISTA DE PRÉSTAMOS ===");
+        if (prestamos.isEmpty()) {
+            System.out.println("No hay préstamos registrados.");
+        } else {
+            prestamos.forEach(System.out::println);
+        }
+    
+    
     }
 }

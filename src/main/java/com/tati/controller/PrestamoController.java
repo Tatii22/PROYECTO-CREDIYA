@@ -32,4 +32,7 @@ public class PrestamoController {
     public List<Prestamo> listarPrestamosPorEstado(String estado) {
         return prestamoService.listarPorEstado(estado);
     }
+    public List<Prestamo> listarTodosPrestamos() {
+        return prestamoService.listarTodosPrestamos();
+    }
 }

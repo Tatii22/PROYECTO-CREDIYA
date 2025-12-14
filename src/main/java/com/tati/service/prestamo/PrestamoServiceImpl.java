@@ -73,4 +73,9 @@ public class PrestamoServiceImpl implements PrestamoService {
     public List<Prestamo> listarPorEstado(String estado) {
         return prestamoRepository.findByEstado(estado);
     }
+
+    @Override
+    public List<Prestamo> listarTodosPrestamos() {
+        return prestamoRepository.findAll();
+    }
 }

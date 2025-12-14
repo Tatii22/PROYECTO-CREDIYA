@@ -162,5 +162,15 @@ public class Prestamo {
         this.saldoPendiente = calcularMontoTotal();
         this.estado = EstadoPrestamo.PENDIENTE;
     }
+
+
+        @Override
+        public String toString() {
+            return "Prestamo [id=" + id + ", clienteId=" + (cliente != null ? cliente.getId() : "null") +
+           ", empleadoId=" + (empleado != null ? empleado.getId() : "null") + ", monto=" + monto
+                    + ", interes=" + interes + ", cuotas=" + cuotas + ", fechaInicio=" + fechaInicio
+                    + ", fechaVencimiento=" + fechaVencimiento + ", saldoPendiente=" + saldoPendiente + ", estado="
+                    + estado + "]";
+        }
 }
 
