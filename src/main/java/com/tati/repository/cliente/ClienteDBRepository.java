@@ -75,7 +75,33 @@ public class ClienteDBRepository implements ClienteRepository {
         return clientes;
     }
     @Override
-    public Cliente findById(int id) { return null; }
+    public Cliente findById(int id) {
+
+        String sql = """
+            SELECT u.*
+            FROM usuarios u
+            JOIN usuario_rol ur ON u.id_usuario = ur.id_usuario
+            JOIN roles r ON ur.id_rol = r.id_rol
+            WHERE r.nombre_rol = 'CLIENTE'
+            AND u.id_usuario = ?
+        """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapCliente(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error buscando cliente por id", e);
+        }
+
+        return null;
+    }
 
     private int obtenerRoleId(Connection conn, String nombreRol) throws SQLException {
         String sql = "SELECT id_rol FROM roles WHERE nombre_rol = ?";
@@ -99,6 +125,16 @@ public class ClienteDBRepository implements ClienteRepository {
     }
 
 
-
+     private Cliente mapCliente(ResultSet rs) throws SQLException {
+        Cliente c = new Cliente();
+        c.setId(rs.getInt("id_usuario"));
+        c.setNombre(rs.getString("nombre"));
+        c.setDocumento(rs.getInt("documento"));
+        c.setCorreo(rs.getString("correo"));
+        c.setTelefono(rs.getString("telefono"));
+        c.setUsuario(rs.getString("usuario"));
+        c.setContrasena(rs.getString("contrasena"));
+        return c;
+    }
     
 }

@@ -3,13 +3,22 @@ package com.tati.views;
 import java.util.Scanner;
 
 import com.tati.model.Cliente;
+import com.tati.controller.PrestamoController;
+import com.tati.repository.prestamo.PrestamoDBRepository;
+import com.tati.service.prestamo.PrestamoServiceImpl;
+
 
 public class MenuCliente {
     private final Cliente cliente;
     private final Scanner scan = new Scanner(System.in);
+    private final PrestamoController prestamoController;
 
     public MenuCliente(Cliente cliente) {
         this.cliente = cliente;
+
+        PrestamoDBRepository prestamoRepo = new PrestamoDBRepository();
+        PrestamoServiceImpl prestamoService = new PrestamoServiceImpl(prestamoRepo);
+        this.prestamoController = new PrestamoController(prestamoService);
     }
     public void iniciar() {
         int opcion = -1;
@@ -57,7 +66,7 @@ public void mostrarMenu() {
     public void procesarOpcion(int opcion) {
         switch (opcion) {
             case 1:
-                System.out.println("Consultar mis préstamos - En construcción");
+                consultarMisPrestamos();
                 break;
             case 2:
                 System.out.println("Pagar cuota - En construcción");
@@ -74,5 +83,34 @@ public void mostrarMenu() {
             default:
                 System.out.println("Opción no válida. Por favor, intente de nuevo.");
         }
+    }
+
+    public void consultarMisPrestamos() {
+        System.out.println("=== MIS PRÉSTAMOS ===");
+        var prestamos = prestamoController.listarPrestamosPorCliente(cliente.getId());
+
+        if (prestamos.isEmpty()) {
+            System.out.println("No tienes préstamos registrados.");
+            return;
+        }
+        prestamos.forEach(p -> {
+        System.out.println("""
+            -------------------------
+            ID Préstamo: %d
+            Monto: %.2f
+            Interés: %.2f%%
+            Cuotas: %d
+            Saldo pendiente: %.2f
+            Estado: %s
+            -------------------------
+            """.formatted(
+                p.getId(),
+                p.getMonto(),
+                p.getInteres(),
+                p.getCuotas(),
+                p.getSaldoPendiente(),
+                p.getEstado()
+        ));
+    });
     }
 }
