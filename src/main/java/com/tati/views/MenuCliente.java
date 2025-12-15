@@ -6,12 +6,18 @@ import com.tati.model.Cliente;
 import com.tati.controller.PrestamoController;
 import com.tati.repository.prestamo.PrestamoDBRepository;
 import com.tati.service.prestamo.PrestamoServiceImpl;
+import com.tati.controller.PagoController;
+import com.tati.repository.pago.PagoDBRepository;
+import com.tati.service.pago.PagoServiceImpl;
+import com.tati.repository.prestamo.PrestamoDBRepository;
 
 
 public class MenuCliente {
     private final Cliente cliente;
     private final Scanner scan = new Scanner(System.in);
     private final PrestamoController prestamoController;
+    private final PagoController pagoController;
+
 
     public MenuCliente(Cliente cliente) {
         this.cliente = cliente;
@@ -19,6 +25,10 @@ public class MenuCliente {
         PrestamoDBRepository prestamoRepo = new PrestamoDBRepository();
         PrestamoServiceImpl prestamoService = new PrestamoServiceImpl(prestamoRepo);
         this.prestamoController = new PrestamoController(prestamoService);
+
+        PagoDBRepository pagoRepo = new PagoDBRepository();
+        PagoServiceImpl pagoService = new PagoServiceImpl(pagoRepo, prestamoRepo);
+        this.pagoController = new PagoController(pagoService);
     }
     public void iniciar() {
         int opcion = -1;
@@ -72,7 +82,7 @@ public void mostrarMenu() {
                 pagarCuota();
                 break;
             case 3:
-                System.out.println("Ver mi estado general - En construcción");
+                verHistorialPagos();
                 break;
             case 4:
                 System.out.println("Ver simulación de prestamo - En construcción");
@@ -114,12 +124,58 @@ public void mostrarMenu() {
     });
     }
     private void pagarCuota() {
-        consultarMisPrestamos();
-        System.out.print("Ingrese el ID del préstamo: ");
+
+        System.out.println("=== MIS PRÉSTAMOS ===");
+        var prestamos = prestamoController.listarPrestamosPorCliente(cliente.getId());
+
+        if (prestamos.isEmpty()) {
+            System.out.println("No tienes préstamos activos.");
+            return;
+        }
+
+        prestamos.forEach(p -> {
+            System.out.println("""
+                ID: %d | Saldo: %.2f | Estado: %s
+                """.formatted(
+                    p.getId(),
+                    p.getSaldoPendiente(),
+                    p.getEstado()
+            ));
+        });
+
+        System.out.print("Ingrese ID del préstamo: ");
         int idPrestamo = Integer.parseInt(scan.nextLine());
-        System.out.print("Ingrese el monto a pagar: ");
+
+        System.out.print("Ingrese monto a pagar: ");
         double monto = Double.parseDouble(scan.nextLine());
-        prestamoController.registrarPago(idPrestamo, monto);
-        System.out.println("Cuota pagada correctamente.");
+
+        pagoController.registrarPago(idPrestamo, monto);
+
+        System.out.println("Pago registrado correctamente");
     }
+
+    private void verHistorialPagos() {
+
+        System.out.print("Ingrese ID del préstamo: ");
+        int idPrestamo = Integer.parseInt(scan.nextLine());
+
+        var pagos = pagoController.listarPagosPorPrestamo(idPrestamo);
+
+        if (pagos.isEmpty()) {
+            System.out.println("Este préstamo no tiene pagos registrados.");
+            return;
+        }
+
+        System.out.println("=== HISTORIAL DE PAGOS ===");
+        pagos.forEach(p -> {
+            System.out.println("""
+                Fecha: %s | Monto: %.2f
+                """.formatted(
+                    p.getFechaPago(),
+                    p.getMonto()
+            ));
+        });
+    }
+
+
 }
