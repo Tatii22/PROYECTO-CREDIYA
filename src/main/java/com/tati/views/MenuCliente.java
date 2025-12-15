@@ -69,7 +69,7 @@ public void mostrarMenu() {
                 consultarMisPrestamos();
                 break;
             case 2:
-                System.out.println("Pagar cuota - En construcción");
+                pagarCuota();
                 break;
             case 3:
                 System.out.println("Ver mi estado general - En construcción");
@@ -85,7 +85,7 @@ public void mostrarMenu() {
         }
     }
 
-    public void consultarMisPrestamos() {
+    private void consultarMisPrestamos() {
         System.out.println("=== MIS PRÉSTAMOS ===");
         var prestamos = prestamoController.listarPrestamosPorCliente(cliente.getId());
 
@@ -112,5 +112,14 @@ public void mostrarMenu() {
                 p.getEstado()
         ));
     });
+    }
+    private void pagarCuota() {
+        consultarMisPrestamos();
+        System.out.print("Ingrese el ID del préstamo: ");
+        int idPrestamo = Integer.parseInt(scan.nextLine());
+        System.out.print("Ingrese el monto a pagar: ");
+        double monto = Double.parseDouble(scan.nextLine());
+        prestamoController.registrarPago(idPrestamo, monto);
+        System.out.println("Cuota pagada correctamente.");
     }
 }

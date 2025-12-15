@@ -61,16 +61,22 @@ public class Prestamo {
         }
     }
 
-    public void aplicarPago(double montoPagado) {
-        if (montoPagado <= 0) {
-            throw new IllegalArgumentException("El monto pagado debe ser mayor que cero");
+    public void aplicarPago(double monto) {
+
+        if (monto <= 0) {
+            throw new IllegalArgumentException("El monto debe ser mayor a cero");
         }
 
-        saldoPendiente -= montoPagado;
+        if (monto > saldoPendiente) {
+            throw new IllegalArgumentException("El monto excede el saldo pendiente");
+        }
 
-        if (saldoPendiente <= 0) {
-            saldoPendiente = 0;
+        saldoPendiente -= monto;
+
+        if (saldoPendiente == 0) {
             estado = EstadoPrestamo.PAGADO;
+        } else {
+            estado = EstadoPrestamo.PENDIENTE;
         }
     }
 
