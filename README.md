@@ -65,6 +65,10 @@ Desarrollar un sistema modular que permita:
 - **Git y GitHub**
 
 ---
+
+## 📂 Estructura del proyecto
+
+```
 CREDIYA
 │
 ├── recibos
