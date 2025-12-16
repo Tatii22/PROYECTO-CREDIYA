@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.tati.controller.PrestamoController;
 import com.tati.controller.ReporteController;
+import com.tati.model.EstadoPrestamo;
 import com.tati.model.Prestamo;
 
 public class MenuReportes {
@@ -33,6 +34,7 @@ public class MenuReportes {
                 case 1 -> prestamosActivos();
                 case 2 -> prestamosVencidos();
                 case 3 -> clientesMorosos();
+                case 4 -> clientesConPrestamosActivos();
                 case 0 -> System.out.println("Volviendo al menú admin...");
                 default -> System.out.println("Opción inválida");
             }
@@ -42,15 +44,16 @@ public class MenuReportes {
 
     private void mostrarMenu() {
         System.out.println("""
-                            +------------------------+
-                            |    MENÚ DE REPORTES    |
-                            +------------------------+
-                            |[1] Préstamos activos   |
-                            |[2] Préstamos vencidos  |
-                            |[3] Clientes morosos    |
-                            +------------------------+
-                            |[0] Volver al menú admin|
-                            +------------------------+
+                            +----------------------------------+
+                            |          MENÚ DE REPORTES        |
+                            +----------------------------------+
+                            |[1] Préstamos activos             |
+                            |[2] Préstamos vencidos            |
+                            |[3] Clientes morosos              |
+                            |[4] clientes con préstamos activos|
+                            +----------------------------------+
+                            |[0] Volver al menú admin          |
+                            +----------------------------------+
                             """);
         System.out.print(">>> Opción: ");
     }
@@ -95,7 +98,18 @@ public class MenuReportes {
         );
     }
 
+    private void clientesConPrestamosActivos() {
 
+        System.out.println("=== CLIENTES CON PRÉSTAMOS ACTIVOS ===");
+
+        prestamoController.listarTodosPrestamos().stream()
+            .filter(p -> p.getEstado() == EstadoPrestamo.PENDIENTE)
+            .map(Prestamo::getId)
+            .distinct()
+            .forEach(id ->
+                System.out.println("ID de cliente: " + id)
+            );
+    }
 
 
 }
