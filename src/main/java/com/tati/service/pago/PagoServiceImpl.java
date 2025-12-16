@@ -1,4 +1,5 @@
 package com.tati.service.pago;
+import java.io.File;
 
 import com.tati.model.EstadoPrestamo;
 import com.tati.model.Pago;
@@ -6,6 +7,9 @@ import com.tati.model.Prestamo;
 import com.tati.repository.pago.PagoRepository;
 import com.tati.repository.prestamo.PrestamoRepository;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -85,10 +89,38 @@ public class PagoServiceImpl implements PagoService {
                 prestamo.getSaldoPendiente(),
                 prestamo.getEstado().name()
         );
+        generarReciboPago(prestamo.getId(), monto, fechaCuota);
     }
 
     @Override
     public List<Pago> listarPagosPorPrestamo(int idPrestamo) {
         return pagoRepository.findByPrestamoId(idPrestamo);
     }
+    public void generarReciboPago(int prestamoId, double monto, LocalDate fecha) {
+
+        try {
+            File carpeta = new File("recibos");
+            if (!carpeta.exists()) {
+                carpeta.mkdirs();
+            }
+
+            File archivo = new File(carpeta, "recibo_prestamo_" + prestamoId + ".txt");
+
+            PrintWriter writer = new PrintWriter(new FileWriter(archivo));
+
+            writer.println("========= RECIBO DE PAGO =========");
+            writer.println("Préstamo ID: " + prestamoId);
+            writer.println("Fecha de pago: " + fecha);
+            writer.println("Monto pagado: $" + monto);
+            writer.println("=================================");
+
+            writer.close();
+
+            System.out.println("Recibo generado en: " + archivo.getAbsolutePath());
+
+        } catch (IOException e) {
+            System.out.println("Error al generar recibo: " + e.getMessage());
+        }
+    }
+
 }

@@ -1,0 +1,5 @@
+========= RECIBO DE PAGO =========
+Préstamo ID: 7
+Fecha de pago: 2026-03-15
+Monto pagado: $510000.0
+=================================
