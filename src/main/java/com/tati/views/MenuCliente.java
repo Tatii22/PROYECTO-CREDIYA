@@ -9,7 +9,7 @@ import com.tati.service.prestamo.PrestamoServiceImpl;
 import com.tati.controller.PagoController;
 import com.tati.repository.pago.PagoDBRepository;
 import com.tati.service.pago.PagoServiceImpl;
-import com.tati.repository.prestamo.PrestamoDBRepository;
+import java.time.LocalDate;
 
 
 public class MenuCliente {
@@ -47,11 +47,11 @@ public void mostrarMenu() {
     
 
     String viewMenu = """
-        .--. .-.   .-. .--. .-..-..-----. .--. 
-        : .--': :   : :: .--': `: :`-. .-': .--'
-        : :   : :   : :: `;  : .` :  : :  : `;  
-        : :__ : :__ : :: :__ : :. :  : :  : :__ 
-        `.__.':___.':_;`.__.':_;:_;  :_;  `.__.'
+                        .--. .-.   .-. .--. .-..-..-----. .--. 
+                        : .--': :   : :: .--': `: :`-. .-': .--'
+                        : :   : :   : :: `;  : .` :  : :  : `;  
+                        : :__ : :__ : :: :__ : :. :  : :  : :__ 
+                        `.__.':___.':_;`.__.':_;:_;  :_;  `.__.'
         """;
     
    
@@ -61,7 +61,7 @@ public void mostrarMenu() {
                         +-----------------------------------+
                         | [1] Consultar mis préstamos       |
                         | [2] Pagar cuota                   |
-                        | [3] Ver mi estado general         |
+                        | [3] Ver historial de pagos        |
                         | [4] Ver simulación de prestamo    |
                         +-----------------------------------+
                         | [0] Volver al menu pricipal       |
@@ -96,6 +96,7 @@ public void mostrarMenu() {
     }
 
     private void consultarMisPrestamos() {
+        
         System.out.println("=== MIS PRÉSTAMOS ===");
         var prestamos = prestamoController.listarPrestamosPorCliente(cliente.getId());
 
@@ -105,27 +106,26 @@ public void mostrarMenu() {
         }
         prestamos.forEach(p -> {
         System.out.println("""
-            -------------------------
-            ID Préstamo: %d
-            Monto: %.2f
-            Interés: %.2f%%
-            Cuotas: %d
+            ID: %d
             Saldo pendiente: %.2f
+            Cuota mensual: %.2f
+            Fecha de la cuota: %s
             Estado: %s
             -------------------------
             """.formatted(
                 p.getId(),
-                p.getMonto(),
-                p.getInteres(),
-                p.getCuotas(),
                 p.getSaldoPendiente(),
+                p.calcularCuotaMensual(),
+                p.getFechaCuotaActual(),
                 p.getEstado()
         ));
     });
+
     }
     private void pagarCuota() {
 
         System.out.println("=== MIS PRÉSTAMOS ===");
+
         var prestamos = prestamoController.listarPrestamosPorCliente(cliente.getId());
 
         if (prestamos.isEmpty()) {
@@ -135,10 +135,17 @@ public void mostrarMenu() {
 
         prestamos.forEach(p -> {
             System.out.println("""
-                ID: %d | Saldo: %.2f | Estado: %s
+                ID: %d
+                Saldo pendiente: %.2f
+                Cuota mensual: %.2f
+                Fecha de la cuota: %s
+                Estado: %s
+                -------------------------
                 """.formatted(
                     p.getId(),
                     p.getSaldoPendiente(),
+                    p.calcularCuotaMensual(),
+                    p.getFechaCuotaActual(),
                     p.getEstado()
             ));
         });
@@ -146,15 +153,44 @@ public void mostrarMenu() {
         System.out.print("Ingrese ID del préstamo: ");
         int idPrestamo = Integer.parseInt(scan.nextLine());
 
+
+        var prestamoSeleccionado = prestamos.stream()
+                .filter(p -> p.getId() == idPrestamo)
+                .findFirst()
+                .orElse(null);
+
+        if (prestamoSeleccionado == null) {
+            System.out.println("Préstamo no encontrado.");
+            return;
+        }
+
+
+        System.out.println(
+            "La cuota de este mes es: " +
+            prestamoSeleccionado.calcularCuotaMensual()
+        );
+
+        System.out.println(
+            "Fecha de pago correspondiente: " +
+            prestamoSeleccionado.getFechaCuotaActual()
+        );
+
         System.out.print("Ingrese monto a pagar: ");
         double monto = Double.parseDouble(scan.nextLine());
 
-        pagoController.registrarPago(idPrestamo, monto);
+        try {
 
-        System.out.println("Pago registrado correctamente");
+            pagoController.registrarPago(idPrestamo, monto, null);
+            System.out.println("Pago registrado correctamente");
+        } catch (Exception e) {
+            System.out.println("Error al registrar pago: " + e.getMessage());
+        }
     }
 
+
     private void verHistorialPagos() {
+
+        consultarMisPrestamos();
 
         System.out.print("Ingrese ID del préstamo: ");
         int idPrestamo = Integer.parseInt(scan.nextLine());
@@ -177,5 +213,6 @@ public void mostrarMenu() {
         });
     }
 
+    
 
 }

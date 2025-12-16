@@ -4,14 +4,16 @@ import com.tati.model.Pago;
 import com.tati.utils.DatabaseConnection;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PagoDBRepository implements PagoRepository{
+public class PagoDBRepository implements PagoRepository {
+
     @Override
     public void save(Pago pago) {
+
         String sql = "INSERT INTO pagos (prestamo_id, fecha_pago, monto) VALUES (?, ?, ?)";
+
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -25,15 +27,18 @@ public class PagoDBRepository implements PagoRepository{
             System.out.println("Error guardando pago: " + e.getMessage());
         }
     }
-    
+
     @Override
     public List<Pago> findByPrestamoId(int prestamoId) {
+
         List<Pago> pagos = new ArrayList<>();
+
         String sql = """
             SELECT * FROM pagos
             WHERE prestamo_id = ?
             ORDER BY fecha_pago ASC
         """;
+
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -52,7 +57,7 @@ public class PagoDBRepository implements PagoRepository{
         } catch (SQLException e) {
             System.out.println("Error buscando pagos por prestamo id: " + e.getMessage());
         }
+
         return pagos;
     }
-    
 }

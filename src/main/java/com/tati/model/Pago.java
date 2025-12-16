@@ -12,12 +12,12 @@ public class Pago {
     public Pago() {
     }
 
-    public Pago(int id, int prestamoId, LocalDate fechaPago, double monto) {
-        this.id = id;
-        this.prestamoId = prestamoId;
-        this.fechaPago = fechaPago;
-        this.monto = monto;
-    }
+    public Pago(int prestamoId, LocalDate fechaPago, double monto) {
+    this.prestamoId = prestamoId;
+    this.fechaPago = fechaPago;
+    this.monto = monto;
+}
+
 
     public int getId() {
         return id;

@@ -1,5 +1,6 @@
 package com.tati.service.pago;
 
+import com.tati.model.EstadoPrestamo;
 import com.tati.model.Pago;
 import com.tati.model.Prestamo;
 import com.tati.repository.pago.PagoRepository;
@@ -20,11 +21,7 @@ public class PagoServiceImpl implements PagoService {
     }
 
     @Override
-    public void registrarPago(int idPrestamo, double monto) {
-
-        if (monto <= 0) {
-            throw new IllegalArgumentException("El monto debe ser mayor que cero");
-        }
+    public void registrarPago(int idPrestamo, double monto, LocalDate ignored) {
 
         Prestamo prestamo = prestamoRepository.findById(idPrestamo);
 
@@ -32,18 +29,40 @@ public class PagoServiceImpl implements PagoService {
             throw new IllegalArgumentException("El préstamo no existe");
         }
 
-        
+        if (prestamo.getEstado() != EstadoPrestamo.PENDIENTE) {
+            throw new IllegalStateException("El préstamo no admite pagos");
+        }
+
+
+        LocalDate fechaCuota = prestamo.getFechaCuotaActual();
+
+        if (LocalDate.now().isAfter(fechaCuota)) {
+            prestamo.setEstado(EstadoPrestamo.VENCIDO);
+
+            prestamoRepository.actualizarSaldoYEstado(
+                    prestamo.getId(),
+                    prestamo.getSaldoPendiente(),
+                    prestamo.getEstado().name()
+            );
+
+            throw new IllegalStateException(
+                    "La cuota está vencida. Fecha límite: " + fechaCuota
+            );
+        }
+
+        double cuotaExacta = prestamo.calcularCuotaMensual();
+
+        if (monto != cuotaExacta) {
+            throw new IllegalArgumentException(
+                    "Debe pagar exactamente el valor de la cuota: " + cuotaExacta
+            );
+        }
+
         prestamo.aplicarPago(monto);
 
-        
-        Pago pago = new Pago();
-        pago.setPrestamoId(idPrestamo);
-        pago.setFechaPago(LocalDate.now());
-        pago.setMonto(monto);
-
+        Pago pago = new Pago(prestamo.getId(), fechaCuota, monto);
         pagoRepository.save(pago);
 
-        
         prestamoRepository.actualizarSaldoYEstado(
                 prestamo.getId(),
                 prestamo.getSaldoPendiente(),
@@ -53,12 +72,6 @@ public class PagoServiceImpl implements PagoService {
 
     @Override
     public List<Pago> listarPagosPorPrestamo(int idPrestamo) {
-
-        if (idPrestamo <= 0) {
-            throw new IllegalArgumentException("ID de préstamo inválido");
-        }
-
         return pagoRepository.findByPrestamoId(idPrestamo);
     }
 }
-    

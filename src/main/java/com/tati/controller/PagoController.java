@@ -2,7 +2,7 @@ package com.tati.controller;
 
 import com.tati.model.Pago;
 import com.tati.service.pago.PagoService;
-
+import java.time.LocalDate;
 import java.util.List;
 
 public class PagoController {
@@ -13,8 +13,8 @@ public class PagoController {
         this.pagoService = pagoService;
     }
 
-    public void registrarPago(int idPrestamo, double monto) {
-        pagoService.registrarPago(idPrestamo, monto);
+    public void registrarPago(int idPrestamo, double monto, LocalDate fechaPago) {
+        pagoService.registrarPago(idPrestamo, monto, fechaPago);
     }
 
     public List<Pago> listarPagosPorPrestamo(int idPrestamo) {

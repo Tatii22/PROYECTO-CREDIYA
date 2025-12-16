@@ -156,24 +156,17 @@ public class PrestamoDBRepository implements PrestamoRepository {
 
     private Prestamo mapPrestamo(ResultSet rs) throws SQLException {
 
-        Prestamo p = new Prestamo();
-        p.setId(rs.getInt("id_prestamo"));
-        p.setMonto(rs.getDouble("monto"));
-        p.setInteres(rs.getDouble("interes"));
-        p.setCuotas(rs.getInt("cuotas"));
-        p.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
-        p.setFechaVencimiento(rs.getDate("fecha_vencimiento").toLocalDate());
-        p.setSaldoPendiente(rs.getDouble("saldo_pendiente"));
-        p.setEstado(EstadoPrestamo.valueOf(rs.getString("estado")));
+        Prestamo prestamo = new Prestamo();
+        prestamo.setId(rs.getInt("id_prestamo"));
+        prestamo.setMonto(rs.getDouble("monto"));
+        prestamo.setInteres(rs.getDouble("interes"));
+        prestamo.setCuotas(rs.getInt("cuotas"));
+        prestamo.setFechaInicio(rs.getDate("fecha_inicio").toLocalDate());
+        prestamo.setFechaVencimiento(rs.getDate("fecha_vencimiento").toLocalDate());
+        prestamo.setSaldoPendiente(rs.getDouble("saldo_pendiente"));
+        prestamo.setEstado(EstadoPrestamo.valueOf(rs.getString("estado")));
 
-        Cliente cliente = new Cliente();
-        cliente.setId(rs.getInt("cliente_id"));
-        p.setCliente(cliente);
-
-        Empleado empleado = new Empleado();
-        empleado.setId(rs.getInt("empleado_id"));
-        p.setEmpleado(empleado);
-
-        return p;
+        return prestamo;
     }
+   
 }
