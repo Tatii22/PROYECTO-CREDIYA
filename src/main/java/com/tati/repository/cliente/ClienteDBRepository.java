@@ -124,6 +124,39 @@ public class ClienteDBRepository implements ClienteRepository {
         }
     }
 
+    @Override
+    public List<Cliente> findClientesMorosos() {
+
+        List<Cliente> clientes = new ArrayList<>();
+
+        String sql = """
+            SELECT DISTINCT u.*
+            FROM usuarios u
+            JOIN prestamos p ON u.id_usuario = p.cliente_id
+            WHERE p.estado = 'VENCIDO'
+        """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Cliente c = new Cliente();
+                c.setId(rs.getInt("id_usuario"));
+                c.setNombre(rs.getString("nombre"));
+                c.setDocumento(rs.getInt("documento"));
+                c.setCorreo(rs.getString("correo"));
+                clientes.add(c);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("No hay clientes morosos", e);
+        }
+
+        return clientes;
+    }
+
+
 
      private Cliente mapCliente(ResultSet rs) throws SQLException {
         Cliente c = new Cliente();

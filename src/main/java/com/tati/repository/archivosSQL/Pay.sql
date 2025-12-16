@@ -65,3 +65,24 @@ INSERT INTO usuarios (nombre, documento, correo, telefono, salario, usuario, con
 VALUES ('Tatiana Villamizar', '12345678', 'tati@mail.com', '3001234567', '3000000', 'admin', '123a');
 INSERT INTO usuario_rol (id_usuario, id_rol) VALUES (1, 1);
 
+INSERT INTO prestamos (
+    cliente_id,
+    empleado_id,
+    monto,
+    interes,
+    cuotas,
+    fecha_inicio,
+    fecha_vencimiento,
+    saldo_pendiente,
+    estado
+) VALUES (
+    4,               
+    5,               
+    1000000,         
+    10.00,           
+    6,               
+    '2024-01-01',    
+    '2024-07-01',    
+    1100000,         
+    'PENDIENTE'      
+);

@@ -5,19 +5,26 @@ import java.util.Scanner;
 
 import com.tati.controller.EmpleadoController;
 import com.tati.controller.PrestamoController;
+import com.tati.controller.ReporteController;
 import com.tati.model.Empleado;
 import com.tati.model.Cliente;
 import com.tati.model.Prestamo;
+import com.tati.repository.cliente.ClienteDBRepository;
 import com.tati.repository.prestamo.PrestamoDBRepository;
 import com.tati.service.prestamo.PrestamoServiceImpl;
-import com.tati.controller.ClienteController;;
+import com.tati.service.reporte.ReporteServiceImpl;
+import com.tati.controller.ClienteController;
+import com.tati.views.MenuReportes;
 
 public class MenuAdmin {
 
     private final EmpleadoController empleadoController;
     private final ClienteController clienteController;
     private final PrestamoController prestamoController;
-    
+    private final ReporteController reporteController;
+    ClienteDBRepository clienteRepo = new ClienteDBRepository();
+
+
 
     private final Scanner scan = new Scanner(System.in);
 
@@ -27,6 +34,10 @@ public class MenuAdmin {
         PrestamoDBRepository prestamoRepo = new PrestamoDBRepository();
         PrestamoServiceImpl prestamoService = new PrestamoServiceImpl(prestamoRepo);
         this.prestamoController = new PrestamoController(prestamoService);
+        ReporteServiceImpl reporteService = new ReporteServiceImpl(prestamoRepo, clienteRepo);
+        this.reporteController = new ReporteController(reporteService);
+
+
     }
     
 
@@ -61,6 +72,7 @@ public class MenuAdmin {
                             | [2] Consultar empleados           |
                             | [3] Consultar préstamos           |
                             | [4] Consultar clientes            |
+                            | [5] Reportes                      |
                             +-----------------------------------+
                             | [0] Volver al menú principal      |
                             +-----------------------------------+
@@ -82,6 +94,8 @@ public class MenuAdmin {
             case 3 ->  listarPrestamos();
 
             case 4 -> listarClientes();
+
+            case 5 -> reportes();
 
             case 0 -> System.out.println("Volviendo al menú principal...");
 
@@ -141,4 +155,10 @@ public class MenuAdmin {
     
     
     }
+
+    private void reportes() {
+        MenuReportes menuReportes = new MenuReportes(prestamoController, reporteController);
+        menuReportes.iniciar();
+    }
+
 }

@@ -147,4 +147,5 @@ public class MenuEmpleado {
 
         System.out.println(" Préstamo registrado correctamente");
     }
+
 }
