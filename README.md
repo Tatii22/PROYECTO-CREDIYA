@@ -55,7 +55,7 @@ Desarrollar un sistema modular que permita:
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+##  Tecnologías utilizadas
 
 - **Java 17**
 - **MySQL**
@@ -172,6 +172,7 @@ CREDIYA
 │
 ├── pom.xml
 └── README.md
+```
 ---
 
 ## ▶️ Ejecución del proyecto
