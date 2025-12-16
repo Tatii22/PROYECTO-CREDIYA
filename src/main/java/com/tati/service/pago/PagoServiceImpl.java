@@ -52,16 +52,33 @@ public class PagoServiceImpl implements PagoService {
 
         double cuotaExacta = prestamo.calcularCuotaMensual();
 
-        if (monto != cuotaExacta) {
+       
+        if (monto < cuotaExacta) {
+
+            prestamo.setEstado(EstadoPrestamo.VENCIDO);
+
+            prestamoRepository.actualizarSaldoYEstado(
+                prestamo.getId(),
+                prestamo.getSaldoPendiente(),
+                prestamo.getEstado().name()
+            );
+
             throw new IllegalArgumentException(
-                    "Debe pagar exactamente el valor de la cuota: " + cuotaExacta
+                "Pago incompleto. El préstamo ha pasado a estado VENCIDO"
             );
         }
 
+    
+        if (monto > cuotaExacta) {
+            throw new IllegalArgumentException(
+                "El monto no puede ser mayor a la cuota: " + cuotaExacta
+            );
+        }
         prestamo.aplicarPago(monto);
 
         Pago pago = new Pago(prestamo.getId(), fechaCuota, monto);
         pagoRepository.save(pago);
+
 
         prestamoRepository.actualizarSaldoYEstado(
                 prestamo.getId(),

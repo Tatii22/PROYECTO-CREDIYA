@@ -14,7 +14,6 @@ import com.tati.repository.prestamo.PrestamoDBRepository;
 import com.tati.service.prestamo.PrestamoServiceImpl;
 import com.tati.service.reporte.ReporteServiceImpl;
 import com.tati.controller.ClienteController;
-import com.tati.views.MenuReportes;
 
 public class MenuAdmin {
 

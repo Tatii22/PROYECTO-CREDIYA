@@ -1,7 +1,6 @@
 package com.tati.repository.prestamo;
 
-import com.tati.model.Cliente;
-import com.tati.model.Empleado;
+
 import com.tati.model.EstadoPrestamo;
 import com.tati.model.Prestamo;
 import com.tati.utils.DatabaseConnection;
