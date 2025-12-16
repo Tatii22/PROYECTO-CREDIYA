@@ -3,6 +3,7 @@ package com.tati.views;
 import java.util.Scanner;
 
 import com.tati.model.Cliente;
+import com.tati.model.Prestamo;
 import com.tati.controller.PrestamoController;
 import com.tati.repository.prestamo.PrestamoDBRepository;
 import com.tati.service.prestamo.PrestamoServiceImpl;
@@ -85,7 +86,7 @@ public void mostrarMenu() {
                 verHistorialPagos();
                 break;
             case 4:
-                System.out.println("Ver simulación de prestamo - En construcción");
+                simularPrestamo();
                 break;
             case 0:
                 System.out.println("Volviendo al menú principal...");
@@ -212,6 +213,50 @@ public void mostrarMenu() {
             ));
         });
     }
+
+    private void simularPrestamo() {
+
+    System.out.println("=== SIMULACIÓN DE PRÉSTAMO ===");
+
+    try {
+        System.out.print("Ingrese monto solicitado: ");
+        double monto = Double.parseDouble(scan.nextLine());
+
+        System.out.print("Ingrese interés (%): ");
+        double interes = Double.parseDouble(scan.nextLine());
+
+        System.out.print("Ingrese número de cuotas (meses): ");
+        int cuotas = Integer.parseInt(scan.nextLine());
+
+        Prestamo simulacion = new Prestamo();
+        simulacion.setMonto(monto);
+        simulacion.setInteres(interes);
+        simulacion.setCuotas(cuotas);
+
+        simulacion.inicializarPrestamo();
+
+        System.out.println("""
+            -------------------------------
+            MONTO SOLICITADO : %.2f
+            INTERÉS          : %.2f%%
+            TOTAL A PAGAR    : %.2f
+            CUOTA MENSUAL    : %.2f
+            FECHA INICIO     : %s
+            FECHA FIN        : %s
+            -------------------------------
+            """.formatted(
+                monto,
+                interes,
+                simulacion.calcularMontoTotal(),
+                simulacion.calcularCuotaMensual(),
+                simulacion.getFechaInicio(),
+                simulacion.getFechaVencimiento()
+        ));
+
+    } catch (NumberFormatException e) {
+        System.out.println("Entrada inválida. Intente de nuevo.");
+    }
+}
 
     
 
