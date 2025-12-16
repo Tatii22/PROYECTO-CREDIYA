@@ -1,0 +1,5 @@
+========= RECIBO DE PAGO =========
+Préstamo ID: 9
+Fecha de pago: 2025-12-15
+Monto pagado: $510000.0
+=================================

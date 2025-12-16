@@ -1,0 +1,508 @@
+' URL: http://www.plantuml.com/plantuml/uml/nHfhRnkvyRj_nI8V3b9jERdUX-A4nZt7IL6ZIK-mx2kAeYYe5UtZTRLKkIiVbBlejn_9vMDco9LMhfCYWACTpWpdnPdXuxkcPQhThAgJvZ-YNZF5LaLPiQQvR5ib5fkMNvUodekFl7XrygDOyg8KggpuoOd5AgugmUkMNycwLRAgk2f-EIcAITc1vrmzYf9FFPhxDXWJ_USqeHxj9nmReb9nfXpSumV4yRHub69fy2fXT7FmPgH7tcl87ntWmg0iDaqPUOdbj11rEmxCJZvvDT-jrXLdIqdrv0uUv7s70K7JbC7e46rKrWy4aeYRwEi7ei8U0ZGE3AFA7XHrVYyVH4qLtZGRfaIK-Gvz1tK9xMW_cTMqCYGUSLhCTVZL3sT5QPYmXjVCmyQ1t939HSjhhcvafPMvyzITJXr-r6Z67X8FhZKiY3MB7q4LJ3JgmxSwAFwWBQwOCWDQdfdYsYUhJg2pOgNPwDzBkLbK_Aouv-MFp61gHycILMzP9dxDU3EJohEYNBsN3Tu5KDNX9EewU5G10wBQ2OFH8TeOi47OTH3LWu22nrWBa7KX3EpXxU11m7WEOWmOL_cLpndGV0xp8a_yJlyowy_-1mAnZ_PMwXKO68nIpE2e6xwMAasWgWC7Kz-Wx-2bX7gqdz2wo3kbkInRyPWL3sBzmEjIBFlGN09kFaWb6vb9iq7J3qpKLhdJNpHvAyfFnKg3HamzDDwa__oNT_GdKc4wixIyulUo3YwWbMGqXXykDCwAMguMYiUaifJbPiLjUDdnKYh5GT8Pa8NE2YgBdVg1jxSEFXe3AKyRC91Gnk1kPGSQPTANJz6TAHfMTJ9s2oIfD9qfQAR_JBOWmdXJp3kmKIP8QIpXuPHic1rCkkXiu9I2YUqwWdBvrS1HOa5vlhEP_KNuvRCrJL9ExUkb4RkJmgYhlsEMyXfgl5cO0-C3E143q__PYsHN7L3HC8c31-gCPlJ1Q95ugODcqt1IPn9_qCOCTakWsyYvGtFWcYq4bHlPiWPxzheMfQ2-jICsOwr45zHeM0VSKivulNJ2nHbyQkyoFIWbk1ow2275HoyAekvPaIgRD014KSqbgka2Bb7ImVCgseMOKL1BarMlgzYiAZTw7Lfttse1AXm9VlpA2FU1rpeV40nXX6IL-0ZACWWmjgv4wQfyNr5_v4hS6ooW6EI1X6WqAxPa3LWrVZNOSLtNd8neKHZ9N34pOmifjLlgt9hLtw6Wm0Ws0p6_eZ3kMKQ6S-Vb1Dwfaj6XytaYlXyc5g8uSnG1oQokanbd8jsiUTBea729_kZBQasqt9wjMGFCk7TFipyBEJcSVSbg8a9rnWOB38z3m-SNNWOVUcBFgiIKn3_v1Jkm4hhzJf9ySOqt45pbRKf5THxixI0ehVKX8xgvFsjZCOOJ7LjT_sRbIRem1yRIOigtNd8yKGHZrJ3nbLKpcTQ1iH4mPL2Ka7euCHYTrXilCtKOokwcXqIQMyDltvZzH2DQgRPTBz-mnxrB_LxKoykgoXw_cB4tM-G_q2t4dJtNA5hoMW_hlrplMcJjuqqF0rLSRBD6FDJC7WgaT9k6gz3LASkTkj48TdLeOsDQ5xRssKurPg_LRAfspiaHaarCzwpa7aXik1iq7M94ELWlQ3pHRgV5RTHabp7nhOT3jznUfFkC7cVlJTYKBpfyoWW36y7_byEHPRr0I7MqzUWnozess0Q1cEFDTcy_ZqzleY06b7LpRgBTqHFXzhrFftt7DnblmcQ2HW8wDUXeNMmZ5dsumqzWcEt-J3DgI-q_76LolcGhRzeXqxHe5ddeQkag3mfZrpbeRfqFr7ftfDQxVURUFQj9QFVH4pkXMZaqUBBfZdgvgjcA3p_hDJhg9Vvcws3MXFaptn0tTswMPBgKDGbcCWgDwuR8YdNGlDU7oR5xecbsHvWcLv7SyM0dS3YNFTp9xznXh5GzLNntw1Q6TXXEackTXj5LKhJgD2sZz1WGC1aDeSU7zyzvjzHdcMpDoNjXq4wfnn6WlEuEtmyb7K3Y39vKnsccOYPdaT0VmrXWZppx1LYldP8IdFV9CzplxFwt-vqeMlJE6hKCKz92m5DIX9N0q9aezDt-2SwAOUoVS5Mckpkf-FBvBihifaatcxfdvALOoFoPRywX6HconHy5pl1RiTtJRiLwrZzeo7oy7NCJ5cc6DoB7Ne0HUu5eFZ9MKpwZ8-BnYzrRzdlez0aUEZtUGqTSKU8Dfo9zmg1xnDsmUyJTy7j4BCfJukMebYATRc1OXKk1mwt75x-HJPfMvDYdFSNO7VCK0qyRdRYXFVGqRQlf4IHqpH3wB_NSH9S8jj2yubb4fsEu_hwxUU-fYjV5Yv-MYtAwsZR_hQOlNtxz-p-SlzB_lfv-yyshRr_gzBGKM_RlvU9FhAhappETN4JvLxwzuPgUFxBgTQis_2kzSvZFtx--PrN3lzAxY4UkRiMAVvGrVtrtU_K2ppz_TmC5K5As66DsEP___VkRjn2BBLUYVk6TC4crx4vg0u_kS3ACmRCPyjZe1y5_xanKuVT3K_eOoTxbbKppqMFpxeUMhTRqxciqtpOjNvsBUenV9Pb9HeVuZ-ErbfhpnWdkuo0-QU3rvjAO0tV7a77wy0ja88YOl8M3EGqYfYzpm8CHY9Wy3W5vrenDiwUwdHKp8zQjrkf7c3nOQ3JCE25fxZKDT0-y9TIvqTHbCoa4hvKiUSFKz-lIU5BQ_yYPxmI_j0C3cMq57eBRG3o2ogiVSfwAC1HEwBbBxX9zk0E61yyQlN6RaeToo9czc-FFuH9PcwCsJIsQh2crtEvA649rplkBDhzKWbLsLm076x4ozyZ9FJLo0dbfCzZYpx-i_QhH-McJFfq8Naaso2b-ZuCcUGTD1ZaeEJ8Pj3PY_xpN2JDTS4gnPjMnNgXycf_6iZAqg0nvq3lmSJFIOTHhVbRpdvYoeXno2pAFo-uDRduFHzHmEmuiAL5RBz9ec3HdnP0PZexRj9LEnc037P9DsZRJ8ItKh8-zzatw5lvtamcDZXJf_FmYvFVCEtF3WmPX1irm2Qc1FjqsFCXBROfYw7r_Gzv96shuCZhpjjYYa9V46JGpITZmfYzV3HVoqDMNmydaroXVICy86fwY0QjZOB1FhkyvF__r8hCDpAD6ZwLNkbOem25xdMfdovoSzY03tsOkAEcCoIsbdOsS1cQGEfmJSlCOuRdBmevrkitkGGR-pzoIKKLoDqnsmdHFc4UDqP5UplHCraDFBaeo8G3tiZ2OI2X3D12fQSXXVccEWA8aqP48qvT2g3XxOf8A52QbXz4Xt48g80W-ev1mJ53wmmegdqHKAajFQZf-mg0yJMF9d2IHPT1wPkp1JEE47DraeZqHYXI131ee5RrJ1IFuwUBktP3JjYgEGfguTuPX1yWmGjf7u_5CiuCHqjObZayc5xaTxmdSaC6gGk4zaoCKlAL2kun-_H1Apom89wn9t447jzXUk6UCyCKOD7-a62JTeHvrZ_W89tNITxnURbRLRm
+
+
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class ClienteController {
+  -clienteService: ClienteService
+  --
+  +ClienteController(clienteService: ClienteService)
+  +crearCliente(cliente: Cliente): void
+  +listarClientes(): List<Cliente>
+  +buscarCliente(id: int): Cliente
+}
+
+class EmpleadoController {
+  -empleadoService: EmpleadoService
+  --
+  +EmpleadoController(empleadoService: EmpleadoService)
+  +crearEmpleado(empleado: Empleado): void
+  +listarEmpleados(): List<Empleado>
+  +buscarEmpleado(id: int): Empleado
+}
+
+class LoginController {
+  -usuarioService: UsuarioService
+  --
+  +LoginController(usuarioService: UsuarioService)
+  +login(usuario: String, contrasena: String): Usuario
+  +obtenerRol(idUsuario: int): String
+}
+
+class PagoController {
+  -pagoService: PagoService
+  --
+  +PagoController(pagoService: PagoService)
+  +registrarPago(idPrestamo: int, monto: double, fechaPago: LocalDate): void
+  +listarPagosPorPrestamo(idPrestamo: int): List<Pago>
+}
+
+class PrestamoController {
+  -prestamoService: PrestamoService
+  --
+  +PrestamoController(prestamoService: PrestamoService)
+  +crearPrestamo(prestamo: Prestamo): void
+  +registrarPago(idPrestamo: int, monto: double): void
+  +buscarPrestamo(id: int): Prestamo
+  +listarPrestamosPorCliente(idCliente: int): List<Prestamo>
+  +listarPrestamosPorEstado(estado: String): List<Prestamo>
+  +listarTodosPrestamos(): List<Prestamo>
+}
+
+class ReporteController {
+  -reporteService: ReporteService
+  --
+  +ReporteController(reporteService: ReporteService)
+  +prestamosActivos(): List<Prestamo>
+  +prestamosVencidos(): List<Prestamo>
+  +clientesMorosos(): List<Cliente>
+}
+
+class Main {
+  +{static} main(args: String[]): void
+}
+
+class Cliente {
+  -telefono: String
+  --
+  +Cliente()
+  +Cliente(id: int, nombre: String, documento: int, correo: String, usuario: String, contrasena: String, telefono: String)
+  +getTelefono(): String
+  +setTelefono(telefono: String): void
+  +toString(): String
+}
+
+class Empleado {
+  -salario: double
+  --
+  +Empleado()
+  +Empleado(id: int, nombre: String, documento: int, correo: String, usuario: String, contrasena: String, salario: double)
+  +getSalario(): double
+  +setSalario(salario: double): void
+  +toString(): String
+}
+
+class Pago {
+  -id: int
+  -prestamoId: int
+  -fechaPago: LocalDate
+  -monto: double
+  --
+  +Pago()
+  +Pago(prestamoId: int, fechaPago: LocalDate, monto: double)
+  +getId(): int
+  +setId(id: int): void
+  +getPrestamoId(): int
+  +setPrestamoId(prestamoId: int): void
+  +getFechaPago(): LocalDate
+  +setFechaPago(fechaPago: LocalDate): void
+  +getMonto(): double
+  +setMonto(monto: double): void
+}
+
+class Prestamo {
+  -id: int
+  -cliente: Cliente
+  -empleado: Empleado
+  -monto: double
+  -interes: double
+  -cuotas: int
+  -fechaInicio: LocalDate
+  -fechaVencimiento: LocalDate
+  -saldoPendiente: double
+  -estado: EstadoPrestamo
+  --
+  +Prestamo()
+  +Prestamo(id: int, cliente: Cliente, empleado: Empleado, monto: double, interes: double, cuotas: int, fechaInicio: LocalDate, fechaVencimiento: LocalDate, saldoPendiente: double, estado: EstadoPrestamo)
+  +calcularMontoTotal(): double
+  +calcularCuotaMensual(): double
+  +inicializarPrestamo(): void
+  +aplicarPago(monto: double): void
+  +verificarVencimiento(): void
+  +calcularCuotasPagadas(): int
+  +getFechaCuotaActual(): LocalDate
+  +estaVencido(): boolean
+  +getId(): int
+  +getCliente(): Cliente
+  +getEmpleado(): Empleado
+  +getMonto(): double
+  +getInteres(): double
+  +getCuotas(): int
+  +getFechaInicio(): LocalDate
+  +getFechaVencimiento(): LocalDate
+  +getSaldoPendiente(): double
+  +getEstado(): EstadoPrestamo
+  +setEstado(estado: EstadoPrestamo): void
+  +setId(id: int): void
+  +setCliente(cliente: Cliente): void
+  +setEmpleado(empleado: Empleado): void
+  +setMonto(monto: double): void
+  +setInteres(interes: double): void
+  +setCuotas(cuotas: int): void
+  +setFechaInicio(fechaInicio: LocalDate): void
+  +setFechaVencimiento(fechaVencimiento: LocalDate): void
+  +setSaldoPendiente(saldoPendiente: double): void
+  +toString(): String
+}
+
+class Usuario {
+  -id: int
+  -nombre: String
+  -documento: int
+  -correo: String
+  -usuario: String
+  -contrasena: String
+  --
+  +Usuario(id: int, nombre: String, documento: int, correo: String, usuario: String, contrasena: String)
+  +Usuario()
+  +getId(): int
+  +setId(id: int): void
+  +getNombre(): String
+  +setNombre(nombre: String): void
+  +getDocumento(): int
+  +setDocumento(documento: int): void
+  +getCorreo(): String
+  +setCorreo(correo: String): void
+  +getUsuario(): String
+  +setUsuario(usuario: String): void
+  +getContrasena(): String
+  +setContrasena(contrasena: String): void
+  +toString(): String
+}
+
+class ClienteDBRepository {
+  +save(cliente: Cliente): void
+  +findAll(): List<Cliente>
+  +findById(id: int): Cliente
+  -obtenerRoleId(conn: Connection, nombreRol: String): int
+  -asignarRol(conn: Connection, userId: int, roleId: int): void
+  +findClientesMorosos(): List<Cliente>
+  -mapCliente(rs: ResultSet): Cliente
+}
+
+interface ClienteRepository {
+  ~findClientesMorosos(): List<Cliente>
+}
+
+interface Repository {
+  ~save(entity: T): void
+  ~findById(id: int): T
+  ~findAll(): List<T>
+}
+
+class EmpleadoDBRepository {
+  +save(empleado: Empleado): void
+  +findAll(): List<Empleado>
+  +findById(id: int): Empleado
+  -obtenerRoleId(conn: Connection, nombreRol: String): int
+  -asignarRol(conn: Connection, userId: int, roleId: int): void
+}
+
+interface EmpleadoRepository {
+}
+
+class PagoDBRepository {
+  +save(pago: Pago): void
+  +findByPrestamoId(prestamoId: int): List<Pago>
+}
+
+interface PagoRepository {
+  ~save(pago: Pago): void
+  ~findByPrestamoId(prestamoId: int): List<Pago>
+}
+
+class PrestamoDBRepository {
+  +save(prestamo: Prestamo): void
+  +findById(id: int): Prestamo
+  +findAll(): List<Prestamo>
+  +findByClienteId(id: int): List<Prestamo>
+  +findByEstado(estado: String): List<Prestamo>
+  +actualizarSaldoYEstado(idPrestamo: int, saldo: double, estado: String): void
+  -mapPrestamo(rs: ResultSet): Prestamo
+}
+
+interface PrestamoRepository {
+  ~findByClienteId(id: int): List<Prestamo>
+  ~findByEstado(estado: String): List<Prestamo>
+  ~findAll(): List<Prestamo>
+  ~actualizarSaldoYEstado(idPrestamo: int, saldo: double, estado: String): void
+}
+
+class UsuarioDBRepository {
+  +save(usuario: Usuario): void
+  +login(username: String, contrasena: String): Usuario
+  +findRolByUsuarioId(idUsuario: int): String
+  +findByUsername(username: String): Usuario
+  +findById(id: int): Usuario
+  +findAll(): List<Usuario>
+}
+
+interface UsuarioRepository {
+  ~findByUsername(username: String): Usuario
+  ~login(username: String, contrasena: String): Usuario
+  ~findRolByUsuarioId(idUsuario: int): String
+}
+
+interface ClienteService {
+  ~registrarCliente(cliente: Cliente): void
+  ~buscarPorId(id: int): Cliente
+  ~listarClientes(): List<Cliente>
+}
+
+class ClienteServiceImpl {
+  -clienteRepository: ClienteRepository
+  --
+  +ClienteServiceImpl(clienteRepository: ClienteRepository)
+  +registrarCliente(cliente: Cliente): void
+  +listarClientes(): List<Cliente>
+  +buscarPorId(id: int): Cliente
+}
+
+interface EmpleadoService {
+  ~registrarEmpleado(empleado: Empleado): void
+  ~buscarPorId(id: int): Empleado
+  ~listarEmpleados(): List<Empleado>
+}
+
+class EmpleadoServiceImpl {
+  -empleadoRepository: EmpleadoRepository
+  --
+  +EmpleadoServiceImpl(empleadoRepository: EmpleadoRepository)
+  +registrarEmpleado(empleado: Empleado): void
+  +listarEmpleados(): List<Empleado>
+  +buscarPorId(id: int): Empleado
+}
+
+interface PagoService {
+  ~registrarPago(idPrestamo: int, monto: double, fechaPago: LocalDate): void
+  ~listarPagosPorPrestamo(idPrestamo: int): List<Pago>
+}
+
+class PagoServiceImpl {
+  -pagoRepository: PagoRepository
+  -prestamoRepository: PrestamoRepository
+  --
+  +PagoServiceImpl(pagoRepository: PagoRepository, prestamoRepository: PrestamoRepository)
+  +registrarPago(idPrestamo: int, monto: double, ignored: LocalDate): void
+  +listarPagosPorPrestamo(idPrestamo: int): List<Pago>
+  +generarReciboPago(prestamoId: int, monto: double, fecha: LocalDate): void
+}
+
+interface PrestamoService {
+  ~crearPrestamo(prestamo: Prestamo): void
+  ~registrarPago(idPrestamo: int, monto: double): void
+  ~buscarPorId(id: int): Prestamo
+  ~listarPorCliente(idCliente: int): List<Prestamo>
+  ~listarPorEstado(estado: String): List<Prestamo>
+  ~listarTodosPrestamos(): List<Prestamo>
+}
+
+class PrestamoServiceImpl {
+  -prestamoRepository: PrestamoRepository
+  --
+  +PrestamoServiceImpl(prestamoRepository: PrestamoRepository)
+  +crearPrestamo(prestamo: Prestamo): void
+  +registrarPago(idPrestamo: int, monto: double): void
+  +buscarPorId(id: int): Prestamo
+  +listarPorCliente(idCliente: int): List<Prestamo>
+  +listarPorEstado(estado: String): List<Prestamo>
+  +listarTodosPrestamos(): List<Prestamo>
+}
+
+interface ReporteService {
+  ~prestamosActivos(): List<Prestamo>
+  ~prestamosVencidos(): List<Prestamo>
+  ~clientesMorosos(): List<Cliente>
+}
+
+class ReporteServiceImpl {
+  -prestamoRepository: PrestamoRepository
+  -clienteRepository: ClienteRepository
+  --
+  +ReporteServiceImpl(prestamoRepository: PrestamoRepository, clienteRepository: ClienteRepository)
+  +prestamosActivos(): List<Prestamo>
+  +prestamosVencidos(): List<Prestamo>
+  +clientesMorosos(): List<Cliente>
+}
+
+interface UsuarioService {
+  ~login(usuario: String, contrasena: String): Usuario
+  ~obtenerRol(idUsuario: int): String
+}
+
+class UsuarioServiceImpl {
+  -usuarioRepository: UsuarioRepository
+  --
+  +UsuarioServiceImpl(usuarioRepository: UsuarioRepository)
+  +login(usuario: String, contrasena: String): Usuario
+  +obtenerRol(idUsuario: int): String
+}
+
+class DatabaseConnection {
+  -{static} URL: String = "jdbc:mysql://127.0.0.1:3309/crediya_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC"
+  -{static} USER: String = "root"
+  -{static} PASSWORD: String = "admin"
+  --
+  -DatabaseConnection()
+  +{static} getConnection(): Connection
+}
+
+class LoginView {
+  -loginController: LoginController
+  -scanner: Scanner = new Scanner(System.in)
+  --
+  +LoginView(loginController: LoginController)
+  +iniciarSesion(): Usuario
+}
+
+class MenuAdmin {
+  -empleadoController: EmpleadoController
+  -clienteController: ClienteController
+  -prestamoController: PrestamoController
+  -reporteController: ReporteController
+  ~clienteRepo: ClienteDBRepository = new ClienteDBRepository()
+  -scan: Scanner = new Scanner(System.in)
+  --
+  +MenuAdmin(empleadoController: EmpleadoController, clienteController: ClienteController)
+  +iniciar(): void
+  +mostrarMenu(): void
+  +procesarOpcion(opcion: int): void
+  -crearEmpleado(): void
+  -listarEmpleados(): void
+  -listarClientes(): void
+  -listarPrestamos(): void
+  -reportes(): void
+}
+
+class MenuCliente {
+  -cliente: Cliente
+  -scan: Scanner = new Scanner(System.in)
+  -prestamoController: PrestamoController
+  -pagoController: PagoController
+  --
+  +MenuCliente(cliente: Cliente)
+  +iniciar(): void
+  +mostrarMenu(): void
+  +procesarOpcion(opcion: int): void
+  -consultarMisPrestamos(): void
+  -pagarCuota(): void
+  -verHistorialPagos(): void
+  -simularPrestamo(): void
+}
+
+class MenuEmpleado {
+  -scan: Scanner = new Scanner(System.in)
+  -clienteController: ClienteController
+  -prestamoController: PrestamoController
+  -empleadoLogueado: Empleado
+  --
+  +MenuEmpleado(empleadoLogueado: Empleado)
+  +iniciar(): void
+  -mostrarMenu(): void
+  -procesarOpcion(opcion: int): void
+  -registrarCliente(): void
+  -listarClientes(): void
+  -registrarPrestamo(): void
+}
+
+class MenuPrincipal {
+  -scan: Scanner = new Scanner(System.in)
+  -loginView: LoginView
+  -loginController: LoginController
+  -empleadoService: EmpleadoService
+  -clienteService: ClienteService
+  --
+  +MenuPrincipal()
+  +iniciar(): void
+  -manejarLogin(): void
+  -mostrarMenu(): void
+}
+
+class MenuReportes {
+  -prestamoController: PrestamoController
+  -scan: Scanner = new Scanner(System.in)
+  -reporteController: ReporteController
+  --
+  +MenuReportes(prestamoController: PrestamoController, reporteController: ReporteController)
+  +iniciar(): void
+  -mostrarMenu(): void
+  -prestamosActivos(): void
+  -prestamosVencidos(): void
+  -clientesMorosos(): void
+  -clientesConPrestamosActivos(): void
+}
+
+ClienteController *-- ClienteService
+ClienteController ..> Cliente
+EmpleadoController *-- EmpleadoService
+EmpleadoController ..> Empleado
+LoginController *-- UsuarioService
+LoginController ..> Usuario
+PagoController *-- PagoService
+PrestamoController *-- PrestamoService
+PrestamoController ..> Prestamo
+ReporteController *-- ReporteService
+Cliente --|> Usuario
+Empleado --|> Usuario
+Prestamo *-- Cliente
+Prestamo *-- Empleado
+ClienteDBRepository ..|> ClienteRepository
+ClienteDBRepository ..> Cliente
+ClienteRepository --|> Repository
+EmpleadoDBRepository ..|> EmpleadoRepository
+EmpleadoDBRepository ..> Empleado
+EmpleadoRepository --|> Repository
+PagoDBRepository ..|> PagoRepository
+PagoDBRepository ..> Pago
+PagoRepository ..> Pago
+PrestamoDBRepository ..|> PrestamoRepository
+PrestamoDBRepository ..> Prestamo
+PrestamoRepository --|> Repository
+UsuarioDBRepository ..|> UsuarioRepository
+UsuarioDBRepository ..> Usuario
+UsuarioRepository --|> Repository
+UsuarioRepository ..> Usuario
+ClienteService ..> Cliente
+ClienteServiceImpl ..|> ClienteService
+ClienteServiceImpl *-- ClienteRepository
+ClienteServiceImpl ..> Cliente
+EmpleadoService ..> Empleado
+EmpleadoServiceImpl ..|> EmpleadoService
+EmpleadoServiceImpl *-- EmpleadoRepository
+EmpleadoServiceImpl ..> Empleado
+PagoServiceImpl ..|> PagoService
+PagoServiceImpl *-- PagoRepository
+PagoServiceImpl *-- PrestamoRepository
+PrestamoService ..> Prestamo
+PrestamoServiceImpl ..|> PrestamoService
+PrestamoServiceImpl *-- PrestamoRepository
+PrestamoServiceImpl ..> Prestamo
+ReporteServiceImpl ..|> ReporteService
+ReporteServiceImpl *-- PrestamoRepository
+ReporteServiceImpl *-- ClienteRepository
+UsuarioService ..> Usuario
+UsuarioServiceImpl ..|> UsuarioService
+UsuarioServiceImpl *-- UsuarioRepository
+UsuarioServiceImpl ..> Usuario
+LoginView *-- LoginController
+LoginView ..> Usuario
+MenuAdmin *-- EmpleadoController
+MenuAdmin *-- ClienteController
+MenuAdmin *-- PrestamoController
+MenuAdmin *-- ReporteController
+MenuAdmin --> ClienteDBRepository
+MenuCliente *-- Cliente
+MenuCliente *-- PrestamoController
+MenuCliente *-- PagoController
+MenuEmpleado *-- ClienteController
+MenuEmpleado *-- PrestamoController
+MenuEmpleado *-- Empleado
+MenuPrincipal *-- LoginView
+MenuPrincipal *-- LoginController
+MenuPrincipal *-- EmpleadoService
+MenuPrincipal *-- ClienteService
+MenuReportes *-- PrestamoController
+MenuReportes *-- ReporteController
+@enduml
