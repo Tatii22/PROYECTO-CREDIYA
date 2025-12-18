@@ -20,4 +20,9 @@ public class PagoController {
     public List<Pago> listarPagosPorPrestamo(int idPrestamo) {
         return pagoService.listarPagosPorPrestamo(idPrestamo);
     }
+
+    public void pagarCuotaVencida(int idPrestamo, double monto) {
+        pagoService.pagarCuotaVencida(idPrestamo, monto);
+    }
+
 }

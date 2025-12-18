@@ -3,6 +3,7 @@ package com.tati.views;
 import java.util.Scanner;
 
 import com.tati.model.Cliente;
+import com.tati.model.EstadoPrestamo;
 import com.tati.model.Prestamo;
 import com.tati.controller.PrestamoController;
 import com.tati.repository.prestamo.PrestamoDBRepository;
@@ -26,6 +27,7 @@ public class MenuCliente {
         PrestamoDBRepository prestamoRepo = new PrestamoDBRepository();
         PrestamoServiceImpl prestamoService = new PrestamoServiceImpl(prestamoRepo);
         this.prestamoController = new PrestamoController(prestamoService);
+        
 
         PagoDBRepository pagoRepo = new PagoDBRepository();
         PagoServiceImpl pagoService = new PagoServiceImpl(pagoRepo, prestamoRepo);
@@ -64,6 +66,7 @@ public void mostrarMenu() {
                         | [2] Pagar cuota                   |
                         | [3] Ver historial de pagos        |
                         | [4] Ver simulación de prestamo    |
+                        | [5] Pagar cuota vencida (con mora)|
                         +-----------------------------------+
                         | [0] Volver al menu pricipal       |
                         +-----------------------------------+
@@ -88,6 +91,8 @@ public void mostrarMenu() {
             case 4:
                 simularPrestamo();
                 break;
+            case 5:
+                pagarCuotaVencida();
             case 0:
                 System.out.println("Volviendo al menú principal...");
                 break;
@@ -258,6 +263,53 @@ public void mostrarMenu() {
     }
 }
 
-    
+    private void pagarCuotaVencida() {
+
+        System.out.println("=== PAGAR CUOTA VENCIDA ===");
+
+        var prestamos = prestamoController.listarPrestamosPorCliente(cliente.getId());
+
+        var vencidos = prestamos.stream()
+                .filter(p -> p.getEstado() == EstadoPrestamo.VENCIDO)
+                .toList();
+
+        if (vencidos.isEmpty()) {
+            System.out.println("No tienes préstamos vencidos.");
+            return;
+        }
+
+        vencidos.forEach(p -> {
+            double mora = p.calcularMora(0.4);
+            double total = p.calcularCuotaMensual() + mora;
+
+            System.out.println("""
+                ID: %d
+                Cuota mensual: %.2f
+                Mora (10%%): %.2f
+                TOTAL A PAGAR: %.2f
+                -------------------------
+                """.formatted(
+                    p.getId(),
+                    p.calcularCuotaMensual(),
+                    mora,
+                    total
+            ));
+        });
+
+        System.out.print("Ingrese ID del préstamo: ");
+        int idPrestamo = Integer.parseInt(scan.nextLine());
+
+        System.out.print("Ingrese monto a pagar: ");
+        double monto = Double.parseDouble(scan.nextLine());
+
+        try {
+            pagoController.pagarCuotaVencida(idPrestamo, monto);
+            System.out.println("Pago con mora registrado correctamente");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+
 
 }

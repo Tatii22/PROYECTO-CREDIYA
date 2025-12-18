@@ -73,18 +73,31 @@ public class Prestamo {
         }
     }
 
+    public boolean estaCuotaVencida() {
+        return LocalDate.now().isAfter(getFechaCuotaActual());
+    }
+
+
     public void verificarVencimiento() {
-        if (estado == EstadoPrestamo.PENDIENTE &&
-                LocalDate.now().isAfter(fechaVencimiento)) {
+        if (estado == EstadoPrestamo.PENDIENTE && estaCuotaVencida()) {
             estado = EstadoPrestamo.VENCIDO;
         }
     }
+
 
     public int calcularCuotasPagadas() {
         double total = calcularMontoTotal();
         double pagado = total - saldoPendiente;
         return (int) Math.floor(pagado / calcularCuotaMensual());
     }
+    public double calcularMora(double porcentaje) {
+        return saldoPendiente * porcentaje;
+    }
+
+    public void aplicarMora(double porcentaje) {
+        saldoPendiente += calcularMora(porcentaje);
+    }
+
     public LocalDate getFechaCuotaActual() {
         int cuotasPagadas = calcularCuotasPagadas();
         return fechaInicio.plusMonths(cuotasPagadas);

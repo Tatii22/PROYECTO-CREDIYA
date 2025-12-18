@@ -9,4 +9,7 @@ public interface PagoService {
     void registrarPago(int idPrestamo, double monto, LocalDate fechaPago);
 
     List<Pago> listarPagosPorPrestamo(int idPrestamo);
+    
+    void pagarCuotaVencida(int idPrestamo, double monto);
+
 }

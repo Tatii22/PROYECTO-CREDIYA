@@ -97,6 +97,51 @@ public class PagoServiceImpl implements PagoService {
     public List<Pago> listarPagosPorPrestamo(int idPrestamo) {
         return pagoRepository.findByPrestamoId(idPrestamo);
     }
+    @Override
+    public void pagarCuotaVencida(int idPrestamo, double monto) {
+
+        Prestamo prestamo = prestamoRepository.findById(idPrestamo);
+
+        if (prestamo == null) {
+            throw new IllegalArgumentException("El préstamo no existe");
+        }
+
+        if (prestamo.getEstado() != EstadoPrestamo.VENCIDO) {
+            throw new IllegalStateException("El préstamo no está vencido");
+        }
+
+        double mora = prestamo.calcularMora(0.10); // 10%
+        double totalAPagar = prestamo.calcularCuotaMensual() + mora;
+
+        if (monto < totalAPagar) {
+            throw new IllegalArgumentException(
+                "Pago insuficiente. Total a pagar con mora: " + totalAPagar
+            );
+        }
+
+        // Aplicar pago
+        prestamo.aplicarPago(prestamo.calcularCuotaMensual());
+
+        // Si aún queda saldo → vuelve a pendiente
+        if (prestamo.getSaldoPendiente() > 0) {
+            prestamo.setEstado(EstadoPrestamo.PENDIENTE);
+        }
+
+        Pago pago = new Pago(
+            prestamo.getId(),
+            LocalDate.now(),
+            monto
+        );
+
+        pagoRepository.save(pago);
+
+        prestamoRepository.actualizarSaldoYEstado(
+            prestamo.getId(),
+            prestamo.getSaldoPendiente(),
+            prestamo.getEstado().name()
+        );
+    }
+
     public void generarReciboPago(int prestamoId, double monto, LocalDate fecha) {
 
         try {
