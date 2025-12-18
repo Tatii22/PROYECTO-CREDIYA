@@ -6,6 +6,7 @@ import com.tati.model.Pago;
 import com.tati.model.Prestamo;
 import com.tati.repository.pago.PagoRepository;
 import com.tati.repository.prestamo.PrestamoRepository;
+import com.tati.exception.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,11 +31,11 @@ public class PagoServiceImpl implements PagoService {
         Prestamo prestamo = prestamoRepository.findById(idPrestamo);
 
         if (prestamo == null) {
-            throw new IllegalArgumentException("El préstamo no existe");
+            throw new EntidadNoEncontradaException("El préstamo no existe");
         }
 
         if (prestamo.getEstado() != EstadoPrestamo.PENDIENTE) {
-            throw new IllegalStateException("El préstamo no admite pagos");
+            throw new OperacionNoPermitidaException("El préstamo no admite pagos");
         }
 
 
@@ -49,7 +50,7 @@ public class PagoServiceImpl implements PagoService {
                     prestamo.getEstado().name()
             );
 
-            throw new IllegalStateException(
+            throw new OperacionNoPermitidaException(
                     "La cuota está vencida. Fecha límite: " + fechaCuota
             );
         }
@@ -67,14 +68,14 @@ public class PagoServiceImpl implements PagoService {
                 prestamo.getEstado().name()
             );
 
-            throw new IllegalArgumentException(
+            throw new PagoInvalidoException(
                 "Pago incompleto. El préstamo ha pasado a estado VENCIDO"
             );
         }
 
     
         if (monto > cuotaExacta) {
-            throw new IllegalArgumentException(
+            throw new PagoInvalidoException(
                 "El monto no puede ser mayor a la cuota: " + cuotaExacta
             );
         }

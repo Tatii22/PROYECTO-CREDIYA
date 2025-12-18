@@ -9,6 +9,7 @@ import com.tati.repository.cliente.ClienteDBRepository;
 import com.tati.repository.prestamo.PrestamoDBRepository;
 import com.tati.service.cliente.ClienteServiceImpl;
 import com.tati.service.prestamo.PrestamoServiceImpl;
+import com.tati.exception.EntidadNoEncontradaException;
 
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class MenuEmpleado {
     public MenuEmpleado(Empleado empleadoLogueado) {
 
         if (empleadoLogueado == null) {
-            throw new IllegalArgumentException("Empleado no puede ser null");
+            throw new EntidadNoEncontradaException("Empleado no puede ser null");
         }
 
         this.empleadoLogueado = empleadoLogueado;

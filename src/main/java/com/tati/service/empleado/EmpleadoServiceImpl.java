@@ -2,6 +2,7 @@ package com.tati.service.empleado;
 
 import com.tati.model.Empleado;
 import com.tati.repository.empleado.EmpleadoRepository;
+import com.tati.exception.EntidadNoEncontradaException;
 
 import java.util.List;
 
@@ -17,19 +18,19 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public void registrarEmpleado(Empleado empleado) {
 
         if (empleado == null) {
-            throw new IllegalArgumentException("El empleado no puede ser null");
+            throw new EntidadNoEncontradaException("El empleado no puede ser null");
         }
 
         if (empleado.getNombre() == null || empleado.getNombre().isBlank()) {
-            throw new IllegalArgumentException("El nombre es obligatorio");
+            throw new EntidadNoEncontradaException("El nombre es obligatorio");
         }
 
         if (empleado.getDocumento() <= 0) {
-            throw new IllegalArgumentException("Documento inválido");
+            throw new EntidadNoEncontradaException("Documento inválido");
         }
 
         if (empleado.getSalario() <= 0) {
-            throw new IllegalArgumentException("El salario debe ser mayor a 0");
+            throw new EntidadNoEncontradaException("El salario debe ser mayor a 0");
         }
 
         empleadoRepository.save(empleado);
@@ -44,7 +45,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public Empleado buscarPorId(int id) {
 
         if (id <= 0) {
-            throw new IllegalArgumentException("ID inválido");
+            throw new EntidadNoEncontradaException("ID inválido");
         }
 
         return empleadoRepository.findById(id);

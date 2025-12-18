@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tati.model.Prestamo;
 import com.tati.repository.prestamo.PrestamoRepository;
+import com.tati.exception.EntidadNoEncontradaException;
 
 public class PrestamoServiceImpl implements PrestamoService {
 
@@ -17,19 +18,19 @@ public class PrestamoServiceImpl implements PrestamoService {
     public void crearPrestamo(Prestamo prestamo) {
 
         if (prestamo == null) {
-            throw new IllegalArgumentException("El préstamo no puede ser null");
+            throw new EntidadNoEncontradaException("El préstamo no puede ser null");
         }
 
         if (prestamo.getMonto() <= 0) {
-            throw new IllegalArgumentException("El monto debe ser mayor que cero");
+            throw new EntidadNoEncontradaException("El monto debe ser mayor que cero");
         }
 
         if (prestamo.getCuotas() <= 0) {
-            throw new IllegalArgumentException("Número de cuotas inválido");
+            throw new EntidadNoEncontradaException("Número de cuotas inválido");
         }
 
         if (prestamo.getCliente() == null || prestamo.getEmpleado() == null) {
-            throw new IllegalArgumentException("Cliente y empleado son obligatorios");
+            throw new EntidadNoEncontradaException("Cliente y empleado son obligatorios");
         }
 
       
@@ -44,7 +45,7 @@ public class PrestamoServiceImpl implements PrestamoService {
         Prestamo prestamo = prestamoRepository.findById(idPrestamo);
 
         if (prestamo == null) {
-            throw new IllegalArgumentException("El préstamo no existe");
+            throw new EntidadNoEncontradaException("El préstamo no existe");
         }
 
         prestamo.aplicarPago(monto);
@@ -59,7 +60,7 @@ public class PrestamoServiceImpl implements PrestamoService {
     @Override
     public Prestamo buscarPorId(int id) {
         if (id <= 0) {
-            throw new IllegalArgumentException("ID inválido");
+            throw new EntidadNoEncontradaException("ID inválido");
         }
         return prestamoRepository.findById(id);
     }

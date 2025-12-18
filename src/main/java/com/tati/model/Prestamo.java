@@ -2,6 +2,8 @@ package com.tati.model;
 
 import java.time.LocalDate;
 
+import com.tati.exception.OperacionNoPermitidaException;
+
 public class Prestamo {
 
     private int id;
@@ -118,9 +120,11 @@ public class Prestamo {
     }
 
     public void setMonto(double monto) {
+        if (monto <= 0) {
+            throw new OperacionNoPermitidaException("El monto debe ser mayor a cero");
+        }
         this.monto = monto;
     }
-
     public void setInteres(double interes) {
         this.interes = interes;
     }
