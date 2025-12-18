@@ -65,3 +65,11 @@ INSERT INTO usuarios (nombre, documento, correo, telefono, salario, usuario, con
 VALUES ('Tatiana Villamizar', '12345678', 'tati@mail.com', '3001234567', '3000000', 'admin', '123a');
 INSERT INTO usuario_rol (id_usuario, id_rol) VALUES (1, 1);
 
+CREATE TABLE historial_estado_prestamo (
+    id_historial INT AUTO_INCREMENT PRIMARY KEY,
+    id_prestamo INT NOT NULL,
+    estado_anterior ENUM('PENDIENTE', 'PAGADO', 'VENCIDO'),
+    estado_nuevo ENUM('PENDIENTE', 'PAGADO', 'VENCIDO'),
+    fecha_cambio DATETIME NOT NULL,
+    FOREIGN KEY (id_prestamo) REFERENCES prestamos(id_prestamo)
+);
