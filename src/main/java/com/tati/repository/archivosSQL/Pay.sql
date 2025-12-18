@@ -65,3 +65,74 @@ INSERT INTO usuarios (nombre, documento, correo, telefono, salario, usuario, con
 VALUES ('Tatiana Villamizar', '12345678', 'tati@mail.com', '3001234567', '3000000', 'admin', '123a');
 INSERT INTO usuario_rol (id_usuario, id_rol) VALUES (1, 1);
 
+-- Usuario empleado
+INSERT INTO usuarios (nombre, documento, correo, telefono, salario, usuario, contrasena) 
+VALUES ('Carlos Gómez', 87654321, 'carlos@mail.com', '3109876543', 2500000, 'cgomez', 'emp123');
+
+-- Usuario cliente
+INSERT INTO usuarios (nombre, documento, correo, telefono, salario, usuario, contrasena) 
+VALUES ('Laura Martínez', 11223344, 'laura@mail.com', '3201112233', 1800000, 'lmartinez', 'cli123');
+
+INSERT INTO usuarios (nombre, documento, correo, telefono, salario, usuario, contrasena) 
+VALUES ('Pedro Ramírez', 99887766, 'pedro@mail.com', '3114455667', 1500000, 'pramirez', 'cli456');
+
+
+-- Rol EMPLEADO
+INSERT INTO usuario_rol (id_usuario, id_rol) VALUES (2, 2);
+
+-- Rol CLIENTE
+INSERT INTO usuario_rol (id_usuario, id_rol) VALUES (3, 3);
+INSERT INTO usuario_rol (id_usuario, id_rol) VALUES (4, 3);
+
+
+INSERT INTO prestamos (
+    cliente_id,
+    empleado_id,
+    monto,
+    interes,
+    cuotas,
+    fecha_inicio,
+    fecha_vencimiento,
+    saldo_pendiente,
+    estado
+) VALUES (
+    3,
+    2,
+    5000000,
+    12.50,
+    24,
+    '2025-01-01',
+    '2026-12-01',
+    5000000,
+    'PENDIENTE'
+);
+
+-- Primer pago
+INSERT INTO pagos (prestamo_id, fecha_pago, monto)
+VALUES (1, '2025-02-01', 250000);
+
+-- Segundo pago
+INSERT INTO pagos (prestamo_id, fecha_pago, monto)
+VALUES (1, '2025-03-01', 250000);
+
+INSERT INTO prestamos (
+    cliente_id,
+    empleado_id,
+    monto,
+    interes,
+    cuotas,
+    fecha_inicio,
+    fecha_vencimiento,
+    saldo_pendiente,
+    estado
+) VALUES (
+    4,
+    2,
+    3000000,
+    15.00,
+    12,
+    '2023-01-01',
+    '2024-01-01',
+    3000000,
+    'VENCIDO'
+);

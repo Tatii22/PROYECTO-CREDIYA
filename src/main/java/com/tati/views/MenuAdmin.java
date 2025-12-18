@@ -71,7 +71,7 @@ public class MenuAdmin {
                             | [2] Consultar empleados           |
                             | [3] Consultar préstamos           |
                             | [4] Consultar clientes            |
-                            | [5] Reportes                      |
+                            | [5] Examen                      |
                             +-----------------------------------+
                             | [0] Volver al menú principal      |
                             +-----------------------------------+
