@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import com.tati.exception.OperacionNoPermitidaException;
 
-public class Prestamo {
+public class GestorPrestamos {
 
     private int id;
 
@@ -23,12 +23,12 @@ public class Prestamo {
     private double saldoPendiente;
     private EstadoPrestamo estado;
 
-    public Prestamo() {
+    public GestorPrestamos() {
         this.estado = EstadoPrestamo.PENDIENTE;
         this.fechaInicio = LocalDate.now();
     }
 
-    public Prestamo(int id, Cliente cliente, Empleado empleado,
+    public GestorPrestamos(int id, Cliente cliente, Empleado empleado,
                     double monto, double interes, int cuotas,
                     LocalDate fechaInicio, LocalDate fechaVencimiento,
                     double saldoPendiente, EstadoPrestamo estado) {

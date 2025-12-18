@@ -8,7 +8,7 @@ import com.tati.controller.PrestamoController;
 import com.tati.controller.ReporteController;
 import com.tati.model.Empleado;
 import com.tati.model.Cliente;
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import com.tati.repository.cliente.ClienteDBRepository;
 import com.tati.repository.prestamo.PrestamoDBRepository;
 import com.tati.service.prestamo.PrestamoServiceImpl;
@@ -144,7 +144,7 @@ public class MenuAdmin {
         clientes.forEach(System.out::println);
     }
     private void listarPrestamos() {
-        List<Prestamo> prestamos = prestamoController.listarTodosPrestamos();
+        List<GestorPrestamos> prestamos = prestamoController.listarTodosPrestamos();
         System.out.println("=== LISTA DE PRÉSTAMOS ===");
         if (prestamos.isEmpty()) {
             System.out.println("No hay préstamos registrados.");

@@ -1,20 +1,20 @@
 package com.tati.service.prestamo;
 
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import java.util.List;
 
 public interface PrestamoService {
 
-    void crearPrestamo(Prestamo prestamo);
+    void crearPrestamo(GestorPrestamos prestamo);
 
     void registrarPago(int idPrestamo, double monto);
 
-    Prestamo buscarPorId(int id);
+    GestorPrestamos buscarPorId(int id);
 
-    List<Prestamo> listarPorCliente(int idCliente);
+    List<GestorPrestamos> listarPorCliente(int idCliente);
 
-    List<Prestamo> listarPorEstado(String estado);
+    List<GestorPrestamos> listarPorEstado(String estado);
 
-    List<Prestamo> listarTodosPrestamos();
+    List<GestorPrestamos> listarTodosPrestamos();
 
 }

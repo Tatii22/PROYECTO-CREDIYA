@@ -1,17 +1,17 @@
 package com.tati.repository.prestamo;
 
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import com.tati.repository.common.Repository;
 
 import java.util.List;
 
-public interface PrestamoRepository extends Repository<Prestamo> {
+public interface PrestamoRepository extends Repository<GestorPrestamos> {
 
-    List<Prestamo> findByClienteId(int id);
+    List<GestorPrestamos> findByClienteId(int id);
 
-    List<Prestamo> findByEstado(String estado);
+    List<GestorPrestamos> findByEstado(String estado);
 
-    List<Prestamo> findAll();
+    List<GestorPrestamos> findAll();
 
     void actualizarSaldoYEstado(int idPrestamo, double saldo, String estado);
 }

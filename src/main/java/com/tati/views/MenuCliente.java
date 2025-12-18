@@ -3,7 +3,7 @@ package com.tati.views;
 import java.util.Scanner;
 
 import com.tati.model.Cliente;
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import com.tati.controller.PrestamoController;
 import com.tati.repository.prestamo.PrestamoDBRepository;
 import com.tati.service.prestamo.PrestamoServiceImpl;
@@ -228,7 +228,7 @@ public void mostrarMenu() {
         System.out.print("Ingrese número de cuotas (meses): ");
         int cuotas = Integer.parseInt(scan.nextLine());
 
-        Prestamo simulacion = new Prestamo();
+        GestorPrestamos simulacion = new GestorPrestamos();
         simulacion.setMonto(monto);
         simulacion.setInteres(interes);
         simulacion.setCuotas(cuotas);

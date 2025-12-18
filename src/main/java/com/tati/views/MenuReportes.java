@@ -7,7 +7,7 @@ import java.util.Scanner;
 import com.tati.controller.PrestamoController;
 import com.tati.controller.ReporteController;
 import com.tati.model.EstadoPrestamo;
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 
 public class MenuReportes {
 
@@ -33,8 +33,7 @@ public class MenuReportes {
             switch (opcion) {
                 case 1 -> prestamosActivos();
                 case 2 -> prestamosVencidos();
-                case 3 -> clientesMorosos();
-                case 4 -> clientesConPrestamosActivos();
+                case 3 -> listarPrestamos();
                 case 0 -> System.out.println("Volviendo al menú admin...");
                 default -> System.out.println("Opción inválida");
             }
@@ -45,12 +44,11 @@ public class MenuReportes {
     private void mostrarMenu() {
         System.out.println("""
                             +----------------------------------+
-                            |          MENÚ DE REPORTES        |
+                            |          MENÚ DE EXAMEN          |
                             +----------------------------------+
                             |[1] Préstamos activos             |
                             |[2] Préstamos vencidos            |
-                            |[3] Clientes morosos              |
-                            |[4] clientes con préstamos activos|
+                            |[3] Mostrar resumen               |
                             +----------------------------------+
                             |[0] Volver al menú admin          |
                             +----------------------------------+
@@ -62,7 +60,7 @@ public class MenuReportes {
 
         System.out.println("=== PRÉSTAMOS ACTIVOS ===");
 
-        List<Prestamo> prestamos = prestamoController.listarTodosPrestamos();
+        List<GestorPrestamos> prestamos = prestamoController.listarTodosPrestamos();
 
         prestamos.stream()
             .filter(p -> p.getEstado().name().equals("PENDIENTE"))
@@ -73,42 +71,23 @@ public class MenuReportes {
 
         System.out.println("=== PRÉSTAMOS VENCIDOS ===");
 
-        List<Prestamo> prestamos = prestamoController.listarTodosPrestamos();
+        List<GestorPrestamos> prestamos = prestamoController.listarTodosPrestamos();
 
         prestamos.stream()
             .filter(p -> p.getEstado().name().equals("VENCIDO"))
             .forEach(System.out::println);
     }
-    private void clientesMorosos() {
 
-        System.out.println("=== CLIENTES MOROSOS ===");
-
-        var clientes = reporteController.clientesMorosos();
-
-        if (clientes.isEmpty()) {
-            System.out.println("No hay clientes morosos.");
-            return;
+    private void listarPrestamos() {
+        List<GestorPrestamos> prestamos = prestamoController.listarTodosPrestamos();
+        System.out.println("=== LISTA DE PRÉSTAMOS ===");
+        if (prestamos.isEmpty()) {
+            System.out.println("No hay préstamos registrados.");
+        } else {
+            prestamos.forEach(System.out::println);
         }
-
-        clientes.forEach(c ->
-            System.out.println(
-                "ID: " + c.getId() +
-                " | Nombre: " + c.getNombre()
-            )
-        );
-    }
-
-    private void clientesConPrestamosActivos() {
-
-        System.out.println("=== CLIENTES CON PRÉSTAMOS ACTIVOS ===");
-
-        prestamoController.listarTodosPrestamos().stream()
-            .filter(p -> p.getEstado() == EstadoPrestamo.PENDIENTE)
-            .map(Prestamo::getId)
-            .distinct()
-            .forEach(id ->
-                System.out.println("ID de cliente: " + id)
-            );
+    
+    
     }
 
 

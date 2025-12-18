@@ -1,13 +1,14 @@
 package com.tati.service.reporte;
 
 import com.tati.model.Cliente;
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 
 import java.util.List;
 
 public interface ReporteService {
 
-    List<Prestamo> prestamosActivos();
-    List<Prestamo> prestamosVencidos();
+    List<GestorPrestamos> filtrarPrestamosActivos();
+    List<GestorPrestamos> filtrarPrestamosVencidos();
     List<Cliente> clientesMorosos();
+    List<GestorPrestamos> mostrarResumen();
 }

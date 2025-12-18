@@ -2,7 +2,7 @@ package com.tati.repository.prestamo;
 
 
 import com.tati.model.EstadoPrestamo;
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import com.tati.utils.DatabaseConnection;
 
 import java.sql.*;
@@ -12,7 +12,7 @@ import java.util.List;
 public class PrestamoDBRepository implements PrestamoRepository {
 
     @Override
-    public void save(Prestamo prestamo) {
+    public void save(GestorPrestamos prestamo) {
 
         String sql = """
             INSERT INTO prestamos
@@ -42,7 +42,7 @@ public class PrestamoDBRepository implements PrestamoRepository {
     }
 
     @Override
-    public Prestamo findById(int id) {
+    public GestorPrestamos findById(int id) {
 
         String sql = "SELECT * FROM prestamos WHERE id_prestamo = ?";
 
@@ -64,9 +64,9 @@ public class PrestamoDBRepository implements PrestamoRepository {
     }
 
     @Override
-    public List<Prestamo> findAll() {
+    public List<GestorPrestamos> findAll() {
 
-        List<Prestamo> prestamos = new ArrayList<>();
+        List<GestorPrestamos> prestamos = new ArrayList<>();
         String sql = "SELECT * FROM prestamos";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -85,9 +85,9 @@ public class PrestamoDBRepository implements PrestamoRepository {
     }
 
     @Override
-    public List<Prestamo> findByClienteId(int id) {
+    public List<GestorPrestamos> findByClienteId(int id) {
 
-        List<Prestamo> prestamos = new ArrayList<>();
+        List<GestorPrestamos> prestamos = new ArrayList<>();
         String sql = "SELECT * FROM prestamos WHERE cliente_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -108,9 +108,9 @@ public class PrestamoDBRepository implements PrestamoRepository {
     }
 
     @Override
-    public List<Prestamo> findByEstado(String estado) {
+    public List<GestorPrestamos> findByEstado(String estado) {
 
-        List<Prestamo> prestamos = new ArrayList<>();
+        List<GestorPrestamos> prestamos = new ArrayList<>();
         String sql = "SELECT * FROM prestamos WHERE estado = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -153,9 +153,9 @@ public class PrestamoDBRepository implements PrestamoRepository {
         }
     }
 
-    private Prestamo mapPrestamo(ResultSet rs) throws SQLException {
+    private GestorPrestamos mapPrestamo(ResultSet rs) throws SQLException {
 
-        Prestamo prestamo = new Prestamo();
+        GestorPrestamos prestamo = new GestorPrestamos();
         prestamo.setId(rs.getInt("id_prestamo"));
         prestamo.setMonto(rs.getDouble("monto"));
         prestamo.setInteres(rs.getDouble("interes"));

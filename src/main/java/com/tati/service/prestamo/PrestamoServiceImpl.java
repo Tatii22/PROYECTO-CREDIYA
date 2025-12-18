@@ -2,7 +2,7 @@ package com.tati.service.prestamo;
 
 import java.util.List;
 
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import com.tati.repository.prestamo.PrestamoRepository;
 import com.tati.exception.EntidadNoEncontradaException;
 
@@ -15,7 +15,7 @@ public class PrestamoServiceImpl implements PrestamoService {
     }
 
     @Override
-    public void crearPrestamo(Prestamo prestamo) {
+    public void crearPrestamo(GestorPrestamos prestamo) {
 
         if (prestamo == null) {
             throw new EntidadNoEncontradaException("El préstamo no puede ser null");
@@ -42,7 +42,7 @@ public class PrestamoServiceImpl implements PrestamoService {
     @Override
     public void registrarPago(int idPrestamo, double monto) {
 
-        Prestamo prestamo = prestamoRepository.findById(idPrestamo);
+        GestorPrestamos prestamo = prestamoRepository.findById(idPrestamo);
 
         if (prestamo == null) {
             throw new EntidadNoEncontradaException("El préstamo no existe");
@@ -58,7 +58,7 @@ public class PrestamoServiceImpl implements PrestamoService {
     }
 
     @Override
-    public Prestamo buscarPorId(int id) {
+    public GestorPrestamos buscarPorId(int id) {
         if (id <= 0) {
             throw new EntidadNoEncontradaException("ID inválido");
         }
@@ -66,17 +66,17 @@ public class PrestamoServiceImpl implements PrestamoService {
     }
 
     @Override
-    public List<Prestamo> listarPorCliente(int idCliente) {
+    public List<GestorPrestamos> listarPorCliente(int idCliente) {
         return prestamoRepository.findByClienteId(idCliente);
     }
 
     @Override
-    public List<Prestamo> listarPorEstado(String estado) {
+    public List<GestorPrestamos> listarPorEstado(String estado) {
         return prestamoRepository.findByEstado(estado);
     }
 
     @Override
-    public List<Prestamo> listarTodosPrestamos() {
+    public List<GestorPrestamos> listarTodosPrestamos() {
         return prestamoRepository.findAll();
     }
 }

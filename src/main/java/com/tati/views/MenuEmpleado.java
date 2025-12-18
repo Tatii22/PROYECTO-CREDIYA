@@ -4,7 +4,7 @@ import com.tati.controller.ClienteController;
 import com.tati.controller.PrestamoController;
 import com.tati.model.Cliente;
 import com.tati.model.Empleado;
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import com.tati.repository.cliente.ClienteDBRepository;
 import com.tati.repository.prestamo.PrestamoDBRepository;
 import com.tati.service.cliente.ClienteServiceImpl;
@@ -137,7 +137,7 @@ public class MenuEmpleado {
         Cliente cliente = new Cliente();
         cliente.setId(idCliente);
 
-        Prestamo prestamo = new Prestamo();
+        GestorPrestamos prestamo = new GestorPrestamos();
         prestamo.setCliente(cliente);
         prestamo.setEmpleado(empleadoLogueado); 
         prestamo.setMonto(monto);

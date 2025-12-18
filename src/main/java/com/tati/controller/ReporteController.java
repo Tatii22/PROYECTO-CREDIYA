@@ -1,7 +1,7 @@
 package com.tati.controller;
 
 import com.tati.model.Cliente;
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import com.tati.service.reporte.ReporteService;
 
 import java.util.List;
@@ -13,14 +13,18 @@ public class ReporteController {
     public ReporteController(ReporteService reporteService) {
         this.reporteService = reporteService;
     }
-
-    public List<Prestamo> prestamosActivos() {
-        return reporteService.prestamosActivos();
+//examen
+    public List<GestorPrestamos> filtrarPrestamosActivos() {
+        return reporteService.filtrarPrestamosActivos();
     }
 
-    public List<Prestamo> prestamosVencidos() {
-        return reporteService.prestamosVencidos();
+    public List<GestorPrestamos> filtrarPrestamosVencidos() {
+        return reporteService.filtrarPrestamosVencidos();
     }
+    public List<GestorPrestamos> mostrarResumen() {
+        return reporteService.mostrarResumen();
+    }
+//
 
     public List<Cliente> clientesMorosos() {
         return reporteService.clientesMorosos();

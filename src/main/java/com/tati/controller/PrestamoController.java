@@ -1,6 +1,6 @@
 package com.tati.controller;
 
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import com.tati.service.prestamo.PrestamoService;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class PrestamoController {
         this.prestamoService = prestamoService;
     }
 
-    public void crearPrestamo(Prestamo prestamo) {
+    public void crearPrestamo(GestorPrestamos prestamo) {
         prestamoService.crearPrestamo(prestamo);
     }
 
@@ -21,18 +21,18 @@ public class PrestamoController {
         prestamoService.registrarPago(idPrestamo, monto);
     }
 
-    public Prestamo buscarPrestamo(int id) {
+    public GestorPrestamos buscarPrestamo(int id) {
         return prestamoService.buscarPorId(id);
     }
 
-    public List<Prestamo> listarPrestamosPorCliente(int idCliente) {
+    public List<GestorPrestamos> listarPrestamosPorCliente(int idCliente) {
         return prestamoService.listarPorCliente(idCliente);
     }
 
-    public List<Prestamo> listarPrestamosPorEstado(String estado) {
+    public List<GestorPrestamos> listarPrestamosPorEstado(String estado) {
         return prestamoService.listarPorEstado(estado);
     }
-    public List<Prestamo> listarTodosPrestamos() {
+    public List<GestorPrestamos> listarTodosPrestamos() {
         return prestamoService.listarTodosPrestamos();
     }
 }

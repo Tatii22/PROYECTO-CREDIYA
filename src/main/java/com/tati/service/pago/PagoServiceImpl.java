@@ -3,7 +3,7 @@ import java.io.File;
 
 import com.tati.model.EstadoPrestamo;
 import com.tati.model.Pago;
-import com.tati.model.Prestamo;
+import com.tati.model.GestorPrestamos;
 import com.tati.repository.pago.PagoRepository;
 import com.tati.repository.prestamo.PrestamoRepository;
 import com.tati.exception.*;
@@ -28,7 +28,7 @@ public class PagoServiceImpl implements PagoService {
     @Override
     public void registrarPago(int idPrestamo, double monto, LocalDate ignored) {
 
-        Prestamo prestamo = prestamoRepository.findById(idPrestamo);
+        GestorPrestamos prestamo = prestamoRepository.findById(idPrestamo);
 
         if (prestamo == null) {
             throw new EntidadNoEncontradaException("El préstamo no existe");
